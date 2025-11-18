@@ -1665,6 +1665,7 @@
 }
 
 /* Clean white card style for service area map */
+/* Clean white card style for service area map */
 .clean-map-card {
     position: relative;
     background: linear-gradient(135deg, #fff7f3 0%, #ffe7dd 45%, #ffecea 100%);
@@ -1675,7 +1676,6 @@
     overflow: hidden;
 }
 
-
 /* Text styling */
 .clean-map-eyebrow {
     font-size: 12px;
@@ -1684,15 +1684,6 @@
     color: var(--text-muted);
     letter-spacing: 0.03em;
 }
-
-.clean-map-tile {
-    border-radius: 14px;
-    padding: 18px;
-    background: #ffffff;
-    border: 1px solid rgba(0,0,0,0.04);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
-}
-
 
 .clean-map-subtitle {
     margin: 0 0 22px 0;
@@ -1711,7 +1702,8 @@
     border: 1px solid rgba(0,0,0,0.06);
     border-radius: 14px;
     padding: 18px;
-    background: #fafafa;
+    background: #ffffff;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
 }
 
 .clean-map-label {
@@ -1725,8 +1717,7 @@
     display: block;
     font-size: 17px;
     font-weight: 600;
-    margin-top: 4px;
-    margin-bottom: 8px;
+    margin: 4px 0 8px;
 }
 
 .clean-map-list {
@@ -1745,8 +1736,141 @@
     .clean-map-grid {
         grid-template-columns: 1fr;
     }
-
     .clean-map-card {
         padding: 22px;
+    }
+}
+
+/* ============================================
+   UNIFIED SERVICE AREA / ROUTE MAP CARD STYLE
+   Branded Red Gradient — The Bin Running Brothers
+   ============================================ */
+
+   .route-map-card {
+    position: relative;
+    background: linear-gradient(135deg, #c0392b 0%, #d74a38 40%, #e35b45 75%, #f06c53 100%);
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+    color: #ffffff;
+    overflow: hidden;
+}
+
+/* Eyebrow */
+.route-map-eyebrow {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    opacity: 0.9;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+}
+
+/* Title */
+.route-map-title {
+    font-size: 20px;
+    font-weight: 650;
+    margin: 0 0 8px;
+}
+
+/* Subtitle */
+.route-map-sub {
+    font-size: 14px;
+    opacity: 0.92;
+    margin-bottom: 22px;
+}
+
+/* 3-column tile grid */
+.route-map-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+/* Individual tiles */
+.route-map-tile {
+    background: rgba(255,255,255,0.16);
+    border-radius: 16px;
+    padding: 16px;
+    backdrop-filter: blur(4px);
+}
+
+/* Tile tags */
+.route-map-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    opacity: 0.85;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* Tile title */
+.route-map-name {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 4px 0 10px;
+}
+
+/* Neighborhood list */
+.route-map-list {
+    padding-left: 18px;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.route-map-list li {
+    margin-bottom: 3px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .route-map-card {
+        padding: 22px;
+    }
+    .route-map-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+}
+
+/* Prevent floating booking button from covering footer */
+@media (max-width: 640px) {
+    footer {
+        padding-bottom: 80px; /* space so footer content isn't hidden */
+    }
+
+    .floating-booking {
+        bottom: 80px !important; /* lift button up on small screens */
+        width: calc(100% - 32px);
+        left: 16px;
+        right: 16px;
+        justify-content: center;
+    }
+}
+
+/* Give the floating button space so it never overlaps footer */
+.page-shell {
+    padding-bottom: 100px; /* Desktop fix */
+}
+
+/* Lift button slightly on all screens */
+.floating-booking {
+    bottom: 40px !important;
+}
+
+/* Mobile enhancement */
+@media (max-width: 640px) {
+    .page-shell {
+        padding-bottom: 130px; /* More room on small screens */
+    }
+    .floating-booking {
+        bottom: 60px !important;
+        width: calc(100% - 32px);
+        left: 16px;
+        right: 16px;
+        justify-content: center;
     }
 }

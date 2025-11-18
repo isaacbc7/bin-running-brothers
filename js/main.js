@@ -89,7 +89,7 @@
 // Nav active state by current page
 (function() {
     var navLinks = document.querySelectorAll(".nav-links a");
-    var path = window.location.pathname.split("/").pop() || "index.html";
+    var path = window.location.pathname.split("/").pop() || "/";
 
     navLinks.forEach(function(link) {
         var href = link.getAttribute("href");
