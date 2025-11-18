@@ -204,6 +204,8 @@
 
 (function() {
     const binCountEl = document.getElementById("binCount");
+    if (!binCountEl) return; // EXIT if pricing builder isn't on this page
+
     const minus = document.getElementById("binMinus");
     const plus = document.getElementById("binPlus");
     const freqBtns = document.querySelectorAll(".freq-btn");
@@ -219,34 +221,25 @@
         let addBin = 5;
 
         let weeklyTotal = base + (bins - 1) * addBin;
-
         let total = weeklyTotal;
 
-        // Twice weekly logic (1.5x, rounded)
         if (frequency === "twice") {
             total = Math.round(weeklyTotal * 1.5);
         }
 
-        // Cleaning add-on
-        let cleaning = 0;
-        if (cleaningCheckbox.checked) {
-            cleaning = 15 + (bins - 1) * 5;
-        }
+        let cleaning = cleaningCheckbox?.checked ? 15 + (bins - 1) * 5 : 0;
 
-        let finalPrice = total + cleaning;
-
-        // Update UI
-        totalEl.textContent = `$${finalPrice}/mo`;
+        totalEl.textContent = `$${total + cleaning}/mo`;
 
         breakdownEl.innerHTML = `
             Base service: $${total}/mo<br>
-            ${cleaningCheckbox.checked ? `Cleaning add-on: +$${cleaning}/mo<br>` : ""}
+            ${cleaning ? `Cleaning add-on: +$${cleaning}/mo<br>` : ""}
             Bins: ${bins}<br>
             Frequency: ${frequency === "weekly" ? "Weekly" : "Twice weekly"}
         `;
     }
 
-    minus.addEventListener("click", () => {
+    minus?.addEventListener("click", () => {
         if (bins > 1) {
             bins--;
             binCountEl.textContent = bins;
@@ -254,7 +247,7 @@
         }
     });
 
-    plus.addEventListener("click", () => {
+    plus?.addEventListener("click", () => {
         bins++;
         binCountEl.textContent = bins;
         calculate();
@@ -269,8 +262,107 @@
         });
     });
 
-    cleaningCheckbox.addEventListener("change", calculate);
+    cleaningCheckbox?.addEventListener("change", calculate);
 
     calculate();
 })();
+document.addEventListener("DOMContentLoaded", function () {
 
+    // --------------------------
+    // LIVE HERO AUTOMATION LOGIC
+    // --------------------------
+
+    (function updateHeroStats() {
+
+        const now = new Date();
+        const day = now.getDay();
+        const hour = now.getHours();
+        const minutes = now.getMinutes();
+
+        const routeChip = document.getElementById("route-chip");
+        const routeTitle = document.getElementById("route-title");
+        const curbText = document.getElementById("curb-time-text");
+        const returnTime = document.getElementById("return-time-pill");
+        const healthText = document.getElementById("route-health-text");
+        const healthDot = document.getElementById("route-health-dot");
+        const miniTag = document.getElementById("hero-mini-tag");
+
+        const floatingTime = document.getElementById("floating-time");
+        const floatingLabel = document.getElementById("floating-label");
+        const floatingMeter = document.getElementById("floating-meter-progress");
+
+        if (!routeChip) return; // Hero section doesn't exist on every page
+
+        // --- SERVICE HOURS ---
+        let serviceToday = true;
+        let openTime;
+        let closeTime;
+
+        if (day === 0) { // Sunday
+            serviceToday = false;
+        } else if (day === 6) { // Saturday
+            openTime = 9;
+            closeTime = 14;
+        } else { // Weekdays
+            openTime = 7;
+            closeTime = 19;
+        }
+
+        if (!serviceToday) {
+            routeChip.textContent = "Closed Today";
+            routeTitle.textContent = "Sunday · No Service";
+            curbText.textContent = "No service today";
+            returnTime.textContent = "—";
+            healthText.textContent = "Next route resumes Monday";
+            miniTag.textContent = "Closed";
+            floatingLabel.textContent = "No service today";
+            floatingTime.textContent = "—";
+            floatingMeter.style.width = "0%";
+            healthDot.style.background = "#888";
+            return;
+        }
+
+        // --- ROUTE TITLE ---
+        const daysText = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        routeTitle.textContent = `${daysText[day]} Route · North Georgia`;
+
+        // --- CURB & RETURN TIMES ---
+        curbText.textContent = "Bins to curb by 6:00 PM";
+        returnTime.textContent = "Bins returned 6 PM–9 PM next day";
+
+        // --- ROUTE STATUS ---
+        if (hour >= openTime && hour < closeTime) {
+            routeChip.textContent = "Live Now · On Time";
+            healthText.textContent = "Route in good standing";
+            healthDot.style.background = "#2ecc71";
+        } else {
+            routeChip.textContent = "Closed · Off Hours";
+            healthText.textContent = "Next window: 7 AM tomorrow";
+            healthDot.style.background = "#f1c40f";
+        }
+
+        // --- MINI TAG ---
+        miniTag.textContent = "Trash Day • Updated";
+
+        // --- FLOATING BADGE TIME ---
+        // --- FLOATING BADGE TIME (12-hour format) ---
+let displayHour = hour % 12 || 12; // converts 0 → 12, 13 → 1, etc.
+let ampm = hour >= 12 ? "PM" : "AM";
+
+floatingTime.textContent =
+    `${displayHour}:${String(minutes).padStart(2, "0")} ${ampm}`;
+        floatingLabel.textContent =
+            hour >= openTime && hour < closeTime
+                ? "Service Window Active"
+                : "Off Hours";
+
+        // Percentage of service hours passed
+        let pct = 0;
+        if (hour >= openTime && hour < closeTime) {
+            pct = ((hour + minutes / 60) - openTime) / (closeTime - openTime) * 100;
+        }
+        floatingMeter.style.width = pct + "%";
+
+    })();
+
+});
