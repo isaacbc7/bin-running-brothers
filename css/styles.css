@@ -45,6 +45,7 @@
             position: sticky;
             top: 0;
             z-index: 40;
+            padding-bottom: 4px;
             backdrop-filter: blur(24px);
             background: linear-gradient(90deg, rgba(255,255,255,0.92), rgba(255,255,255,0.9));
             border-bottom: 1px solid rgba(0,0,0,0.04);
@@ -52,7 +53,7 @@
         .nav-inner {
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: 14px 20px;
+            padding: 14px 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -82,6 +83,7 @@
         .nav-title-block {
             display: flex;
             flex-direction: column;
+            white-space: nowrap;
             line-height: 1.1;
         }
         .nav-brand {
@@ -96,7 +98,8 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 16px;
+            white-space: nowrap;
             font-size: 14px;
         }
         .nav-link {
@@ -1205,3 +1208,196 @@
                 justify-content: center;
             }
         }
+
+        /* ===== CONTACT PAGE FIXES ===== */
+
+/* Make both cards align evenly */
+.contact-layout {
+    align-items: flex-start;
+}
+
+/* Improve spacing between the cards and prevent collapse */
+.contact-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 14px;
+}
+
+/* Improve vertical rhythm in form */
+.contact-form .field-row > div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Ensure the submit button sits separated */
+.contact-form button {
+    margin-top: 8px;
+    width: fit-content;
+}
+
+/* Fix the two-column header alignment */
+.section-heading {
+    align-items: flex-start;
+}
+
+/* Keep hours block narrower and aligned */
+.section-heading .section-title-block:last-child {
+    min-width: 180px;
+}
+
+/* Fix the booking strip overlap on this page */
+#booking-strip {
+    margin-bottom: 40px;
+}
+
+/* Improve readability on mid-size screens */
+@media (max-width: 1100px) {
+    .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+}
+
+/* Fix for mobile padding & spacing */
+@media (max-width: 768px) {
+    .contact-card {
+        padding: 16px;
+    }
+    .contact-layout {
+        gap: 26px;
+    }
+    #booking-strip {
+        margin-bottom: 50px;
+    }
+}
+
+#booking-strip {
+    margin-top: 80px;
+}
+
+/* --- Pricing Builder --- */
+
+.pricing-hero {
+    text-align: left;
+}
+
+.pricing-builder-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 30px;
+}
+
+.pricing-card-new {
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    background: rgba(255,255,255,0.96);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.builder-title {
+    font-size: 20px;
+    font-weight: 650;
+}
+
+.builder-label {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.builder-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(0,0,0,0.04);
+    padding: 10px 14px;
+    border-radius: 999px;
+    width: fit-content;
+}
+
+.builder-counter button {
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.builder-counter span {
+    font-size: 18px;
+    font-weight: 600;
+    width: 26px;
+    text-align: center;
+}
+
+.builder-frequency {
+    display: flex;
+    gap: 10px;
+}
+
+.freq-btn {
+    border-radius: 999px;
+    padding: 8px 14px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: #ffffff;
+    cursor: pointer;
+    font-size: 13px;
+    transition: var(--transition-fast);
+}
+
+.freq-btn.active {
+    background: var(--brand-red);
+    color: #ffffff;
+    border-color: var(--brand-red);
+}
+
+.builder-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.builder-results {
+    margin-top: 10px;
+}
+
+.builder-results-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.builder-total {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 6px 0;
+}
+
+.builder-breakdown {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* Right Side Card */
+.pricing-info-card {
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    background: #111111;
+    color: #ffffff;
+    box-shadow: 0 22px 60px rgba(0,0,0,0.7);
+}
+
+.pricing-info-card ul {
+    padding-left: 18px;
+    font-size: 13px;
+}
+
+@media (max-width: 960px) {
+    .pricing-builder-grid {
+        grid-template-columns: 1fr;
+    }
+}

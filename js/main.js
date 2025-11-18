@@ -201,3 +201,76 @@
         contactForm.reset();
     });
 })();
+
+(function() {
+    const binCountEl = document.getElementById("binCount");
+    const minus = document.getElementById("binMinus");
+    const plus = document.getElementById("binPlus");
+    const freqBtns = document.querySelectorAll(".freq-btn");
+    const cleaningCheckbox = document.getElementById("addCleaning");
+    const totalEl = document.getElementById("builderTotal");
+    const breakdownEl = document.getElementById("builderBreakdown");
+
+    let bins = 1;
+    let frequency = "weekly";
+
+    function calculate() {
+        let base = 25;
+        let addBin = 5;
+
+        let weeklyTotal = base + (bins - 1) * addBin;
+
+        let total = weeklyTotal;
+
+        // Twice weekly logic (1.5x, rounded)
+        if (frequency === "twice") {
+            total = Math.round(weeklyTotal * 1.5);
+        }
+
+        // Cleaning add-on
+        let cleaning = 0;
+        if (cleaningCheckbox.checked) {
+            cleaning = 15 + (bins - 1) * 5;
+        }
+
+        let finalPrice = total + cleaning;
+
+        // Update UI
+        totalEl.textContent = `$${finalPrice}/mo`;
+
+        breakdownEl.innerHTML = `
+            Base service: $${total}/mo<br>
+            ${cleaningCheckbox.checked ? `Cleaning add-on: +$${cleaning}/mo<br>` : ""}
+            Bins: ${bins}<br>
+            Frequency: ${frequency === "weekly" ? "Weekly" : "Twice weekly"}
+        `;
+    }
+
+    minus.addEventListener("click", () => {
+        if (bins > 1) {
+            bins--;
+            binCountEl.textContent = bins;
+            calculate();
+        }
+    });
+
+    plus.addEventListener("click", () => {
+        bins++;
+        binCountEl.textContent = bins;
+        calculate();
+    });
+
+    freqBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            freqBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            frequency = btn.dataset.frequency;
+            calculate();
+        });
+    });
+
+    cleaningCheckbox.addEventListener("change", calculate);
+
+    calculate();
+})();
+
