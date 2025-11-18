@@ -66,54 +66,102 @@
                 </a>
             </div>
             <div class="areas-layout">
-                <div class="areas-map">
-                    <div class="section-eyebrow" style="color:rgba(255,255,255,0.7); margin-bottom:6px;">Route map</div>
-                    <h3 style="font-size:18px; margin:0 0 8px 0;">Current Bin Running Brothers coverage</h3>
-                    <p style="font-size:13px; color:rgba(255,255,255,0.82); margin:0 0 14px 0;">
-                        Live, optimized routes covering key neighborhoods, with more being added each season.
+                <div class="areas-map clean-map-card">
+                    <span class="clean-map-eyebrow">Route coverage</span>
+                    <h3 class="clean-map-title">Current Bin Running Brothers service area</h3>
+                    <p class="clean-map-subtitle">
+                        Covering key neighborhoods across Jasper, Ball Ground, and Canton — with more added each season.
                     </p>
-                    <div class="areas-map-grid">
-                        <div class="areas-map-tile">
-                            <span class="areas-map-label">Core route</span>
-                            <span class="areas-map-name">Ball Ground</span>
-                            <span style="font-size:11px; color:rgba(255,255,255,0.8);">Yellow Creek · Downtown · Surroundings</span>
+                
+                    <div class="clean-map-grid">
+                
+                        <!-- CORE ROUTE — Jasper -->
+                        <div class="clean-map-tile">
+                            <span class="clean-map-label">Core route</span>
+                            <span class="clean-map-name">Jasper</span>
+                            <ul class="clean-map-list">
+                                <li>Bent Tree</li>
+                                <li>Big Canoe</li>
+                                <li>Eagles Rest</li>
+                                <li>Grandview area</li>
+                                <li>Talking Rock corridor</li>
+                                <li>Downtown Jasper</li>
+                            </ul>
                         </div>
-                        <div class="areas-map-tile">
-                            <span class="areas-map-label">Expanding</span>
-                            <span class="areas-map-name">Canton</span>
-                            <span style="font-size:11px; color:rgba(255,255,255,0.8);">Sixes · Riverstone · Laurel Canyon</span>
+                
+                        <!-- EXPANDING — Ball Ground -->
+                        <div class="clean-map-tile">
+                            <span class="clean-map-label">Expanding</span>
+                            <span class="clean-map-name">Ball Ground</span>
+                            <ul class="clean-map-list">
+                                <li>Yellow Creek</li>
+                                <li>Downtown Ball Ground</li>
+                                <li>Heritage Woods</li>
+                                <li>The Preserve at Etowah</li>
+                                <li>Etowah Valley</li>
+                            </ul>
                         </div>
-                        <div class="areas-map-tile">
-                            <span class="areas-map-label">Pilot</span>
-                            <span class="areas-map-name">Cumming</span>
-                            <span style="font-size:11px; color:rgba(255,255,255,0.8);">South Forsyth</span>
+                
+                        <!-- GROWING — Canton -->
+                        <div class="clean-map-tile">
+                            <span class="clean-map-label">Growing</span>
+                            <span class="clean-map-name">Canton</span>
+                            <ul class="clean-map-list">
+                                <li>Laurel Canyon</li>
+                                <li>Riverstone</li>
+                                <li>Hickory Flat</li>
+                                <li>Bridgemill</li>
+                                <li>Free Home</li>
+                                <li>East Cherokee</li>
+                            </ul>
                         </div>
+                
                     </div>
-                    <div class="areas-map-spot areas-map-spot-one"></div>
-                    <div class="areas-map-spot areas-map-spot-two"></div>
-                    <div class="areas-map-spot areas-map-spot-three"></div>
                 </div>
-                <aside class="areas-list">
-                    <h3 style="margin:0 0 8px 0; font-size:16px;">Neighborhoods we frequently serve</h3>
-                    <p style="font-size:13px; color:var(--text-muted); margin:0 0 10px 0;">
-                        If you see your area below, we can likely add you to an existing route within days.
-                    </p>
-                    <div class="areas-row">
-                        <span class="areas-chip">Yellow Creek Road</span>
-                        <span class="areas-chip">Downtown Ball Ground</span>
-                        <span class="areas-chip">Laurel Canyon</span>
-                        <span class="areas-chip">Lakeside Ridge</span>
-                        <span class="areas-chip">Hickory Flat</span>
-                        <span class="areas-chip">Free Home</span>
-                        <span class="areas-chip">East Cherokee</span>
-                        <span class="areas-chip">South Forsyth</span>
-                        <span class="areas-chip">Highway 20 corridor</span>
-                    </div>
-                    <p style="font-size:12px; color:var(--text-muted); margin-top:12px;">
-                        Not on the list yet? Reach out anyway. We track interest by street, and when enough neighbors raise their hands, we activate a route.
-                    </p>
-                </aside>
-            </div>
+                
+                
+                
+                <section id="areas">
+            </div><aside class="areas-list">
+                <h3 style="margin:0 0 8px 0; font-size:16px;">Neighborhoods we frequently serve</h3>
+                <p style="font-size:13px; color:var(--text-muted); margin:0 0 10px 0;">
+                    If your neighborhood is listed below, we can likely add you to an existing route this week.
+                </p>
+            
+                <div class="areas-row">
+                    <!-- Jasper (Core) -->
+                    <span class="areas-chip">Bent Tree</span>
+                    <span class="areas-chip">Big Canoe</span>
+                    <span class="areas-chip">Grandview</span>
+                    <span class="areas-chip">Talking Rock corridor</span>
+                    <span class="areas-chip">Downtown Jasper</span>
+                    <span class="areas-chip">Refuge Road</span>
+                    <span class="areas-chip">Burnt Mountain</span>
+                    <span class="areas-chip">Sharp Mountain</span>
+            
+                    <!-- Ball Ground (Expanding) -->
+                    <span class="areas-chip">Yellow Creek</span>
+                    <span class="areas-chip">Downtown Ball Ground</span>
+                    <span class="areas-chip">Heritage Woods</span>
+                    <span class="areas-chip">Preserve at Etowah</span>
+                    <span class="areas-chip">Nelson</span>
+                    <span class="areas-chip">Etowah Valley</span>
+            
+                    <!-- Canton (Growing) -->
+                    <span class="areas-chip">Laurel Canyon</span>
+                    <span class="areas-chip">Riverstone</span>
+                    <span class="areas-chip">Hickory Flat</span>
+                    <span class="areas-chip">Bridgemill</span>
+                    <span class="areas-chip">Free Home</span>
+                    <span class="areas-chip">East Cherokee</span>
+                    <span class="areas-chip">Harmony on the Lakes</span>
+                    <span class="areas-chip">Woodmont</span>
+                </div>
+            
+                <p style="font-size:12px; color:var(--text-muted); margin-top:12px;">
+                    Don’t see yours? Reach out — we activate new routes when enough neighbors request service.
+                </p>
+            </aside>            
         </section>
     </main>
     <footer class="footer">
