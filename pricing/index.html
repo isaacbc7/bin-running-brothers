@@ -6,17 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Simple, transparent pricing for trash bin running in North Georgia.">
     
-        <!-- Styles -->
         <link rel="stylesheet" href="/css/styles.css">
     
-        <!-- Favicons -->
         <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="192x192" href="/images/web-app-manifest-192x192.png">
         <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
         <link rel="manifest" href="/site.webmanifest">
     
-        <!-- Social Sharing -->
         <meta property="og:title" content="Pricing | The Bin Running Brothers">
         <meta property="og:description" content="Simple, transparent pricing for curbside bin running, post-pickup return, HOA plans, and more.">
         <meta property="og:image" content="https://thebinrunningbrothers.com/images/web-app-manifest-512x512.png">
@@ -27,7 +24,6 @@
 <body>
 <div class="page-shell">
 
-    <!-- NAV -->
     <header class="nav">
         <div class="nav-inner">
             <div class="nav-left">
@@ -49,7 +45,7 @@
                 <a href="/contact/" class="nav-link">Contact</a>
             </nav>
 
-            <a class="nav-cta" href="/contact/">
+            <a class="nav-cta" href="https://bcbpro.com/book/tbrb">
                 <span>Get Started</span>
             </a>
 
@@ -72,10 +68,8 @@
         </div>
     </header>
 
-    <!-- MAIN -->
     <main>
 
-        <!-- HERO -->
         <section class="section pricing-hero">
             <div class="section-title-block">
                 <span class="section-eyebrow">Pricing</span>
@@ -86,15 +80,12 @@
             </div>
         </section>
 
-        <!-- CALCULATOR -->
         <section class="section pricing-builder">
             <div class="pricing-builder-grid">
 
-                <!-- LEFT: CALCULATOR -->
                 <div class="pricing-card-new">
                     <h3 class="builder-title">Build your monthly price</h3>
 
-                    <!-- Number of bins -->
                     <label class="builder-label">How many bins?</label>
                     <div class="builder-counter">
                         <button id="binMinus" type="button">−</button>
@@ -102,14 +93,12 @@
                         <button id="binPlus" type="button">+</button>
                     </div>
 
-                    <!-- Frequency -->
                     <label class="builder-label" style="margin-top:16px;">Pickup frequency</label>
                     <div class="builder-frequency">
                         <button class="freq-btn active" data-frequency="weekly">Weekly</button>
                         <button class="freq-btn" data-frequency="twice">Twice a week</button>
                     </div>
 
-                    <!-- Cleaning add-on -->
                     <label class="builder-label" style="margin-top:16px;">
                         Add bin cleaning?
                     </label>
@@ -118,17 +107,14 @@
                         <label for="addCleaning">Yes, include monthly cleaning</label>
                     </div>
 
-                    <!-- RESULTS -->
                     <div class="builder-results">
                         <h3 class="builder-results-title">Your estimated price</h3>
                         <div id="builderTotal" class="builder-total">$25/mo</div>
                         <div id="builderBreakdown" class="builder-breakdown">
-                            <!-- JS fills this -->
-                        </div>
+                            </div>
                     </div>
                 </div>
 
-                <!-- RIGHT: INFO -->
                 <aside class="pricing-info-card">
                     <h3>What’s included</h3>
                     <ul>
@@ -140,7 +126,7 @@
                         <li>Fully insured, family-owned</li>
                     </ul>
 
-                    <a href="/contact/" class="btn-primary" style="margin-top:18px;">
+                    <a href="https://bcbpro.com/book/tbrb" class="btn-primary" style="margin-top:18px;">
                         <span>View Pricing</span>
                         <span class="btn-icon-circle">→</span>
                     </a>
@@ -151,7 +137,6 @@
 
     </main>
 
-    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-inner">
             <div>
@@ -196,11 +181,11 @@
     </footer>
 
 </div>
-<button class="floating-booking" type="button" data-scroll-target="#booking-strip">
+<a class="floating-booking" href="https://bcbpro.com/book/tbrb">
     <div class="floating-booking-dot"></div>
     <span>Trash day help is available in your area.</span>
     <span class="floating-booking-status">Get Started</span>
-</button>
+</a>
 <script src="/js/main.js"></script>
 
 </body>
