@@ -7,37 +7,6 @@
         <meta name="description" content="Simple, transparent pricing for trash bin running in North Georgia.">
     
         <link rel="stylesheet" href="/css/styles.css">
-        
-        <style>
-            .builder-service-options {
-                display: flex;
-                gap: 8px;
-                margin-top: 8px;
-                flex-wrap: wrap;
-            }
-            .service-btn {
-                flex: 1;
-                padding: 10px;
-                border: 1px solid #ccc;
-                background: #fff;
-                border-radius: 4px;
-                cursor: pointer;
-                font-weight: 500;
-                font-size: 0.9rem;
-                min-width: 80px;
-                transition: all 0.2s ease;
-            }
-            .service-btn.active {
-                background-color: #000; /* Assuming black based on your logo/branding */
-                color: #fff;
-                border-color: #000;
-            }
-            .service-btn:hover {
-                border-color: #000;
-            }
-            /* Hide the frequency button styles from previous version if necessary, 
-               or reuse them if they match .service-btn */
-        </style>
     
         <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
@@ -124,11 +93,11 @@
                         <button id="binPlus" type="button">+</button>
                     </div>
 
-                    <label class="builder-label" style="margin-top:16px;">Service Option</label>
-                    <div class="builder-service-options">
-                        <button class="service-btn active" data-service="curb_return">Curb & Return</button>
-                        <button class="service-btn" data-service="to_curb">To Curb</button>
-                        <button class="service-btn" data-service="return">Return</button>
+                    <label class="builder-label" style="margin-top:16px;">Service Type</label>
+                    <div class="builder-frequency">
+                        <button class="freq-btn active" data-service="curb_return">Curb & Return</button>
+                        <button class="freq-btn" data-service="to_curb">To Curb</button>
+                        <button class="freq-btn" data-service="return">Return</button>
                     </div>
 
                     <label class="builder-label" style="margin-top:16px;">
@@ -142,7 +111,9 @@
                     <div class="builder-results">
                         <h3 class="builder-results-title">Your estimated price</h3>
                         <div id="builderTotal" class="builder-total">$35/mo</div>
-                        <div id="builderBreakdown" class="builder-breakdown">1 bin • Curb & Return</div>
+                        <div id="builderBreakdown" class="builder-breakdown">
+                            1 bin • Curb & Return
+                        </div>
                     </div>
                 </div>
 
@@ -226,7 +197,9 @@
         const binMinus = document.getElementById('binMinus');
         const binPlus = document.getElementById('binPlus');
         const binCountEl = document.getElementById('binCount');
-        const serviceBtns = document.querySelectorAll('.service-btn');
+        // Select buttons using the existing class "freq-btn"
+        const serviceBtns = document.querySelectorAll('.freq-btn'); 
+        const cleaningCheckbox = document.getElementById('addCleaning');
         const builderTotal = document.getElementById('builderTotal');
         const builderBreakdown = document.getElementById('builderBreakdown');
         
@@ -234,67 +207,66 @@
         let count = 1;
         let serviceType = 'curb_return'; // 'curb_return', 'to_curb', or 'return'
         
-        // Base Pricing Configuration
+        // Pricing Logic
         const PRICING = {
             curb_return: { base: 35, additional: 5, label: "Curb & Return" },
             to_curb:     { base: 20, additional: 5, label: "To Curb" },
             return:      { base: 20, additional: 5, label: "Return Only" }
         };
 
-        // Update UI Function
+        const cleaningPrice = 0; // Set this if cleaning adds cost (e.g. 10)
+
         function updateCalculator() {
-            // Calculate
             const plan = PRICING[serviceType];
             
-            // Formula: Base price (covers 1st bin) + (Additional bins * fee)
-            // Note: If bins = 1, additional is 0.
+            // Formula: Base price (includes 1st bin) + (Additional bins * 5)
             const additionalBins = Math.max(0, count - 1);
-            const total = plan.base + (additionalBins * plan.additional);
+            let total = plan.base + (additionalBins * plan.additional);
+
+            // Add cleaning if checked
+            if (cleaningCheckbox.checked) {
+                total += cleaningPrice;
+            }
             
-            // Render
+            // Update Text
             binCountEl.textContent = count;
             builderTotal.textContent = `$${total}/mo`;
             
-            // Helper text for clarity
             let breakdownText = `${count} bin${count > 1 ? 's' : ''} • ${plan.label}`;
             if (additionalBins > 0) {
                  breakdownText += ` (+$${additionalBins * plan.additional} extra bins)`;
             }
+            if (cleaningCheckbox.checked && cleaningPrice > 0) {
+                breakdownText += ` + Cleaning`;
+            }
+            
             builderBreakdown.textContent = breakdownText;
         }
 
-        // Event Listeners: Bins
+        // Listeners
         binMinus.addEventListener('click', () => {
-            if (count > 1) {
-                count--;
-                updateCalculator();
-            }
+            if (count > 1) { count--; updateCalculator(); }
         });
 
         binPlus.addEventListener('click', () => {
-            if (count < 10) { // arbitrary max of 10
-                count++;
-                updateCalculator();
-            }
+            if (count < 10) { count++; updateCalculator(); }
         });
 
-        // Event Listeners: Service Type
         serviceBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all
                 serviceBtns.forEach(b => b.classList.remove('active'));
-                // Add to clicked
                 btn.classList.add('active');
-                // Update state
                 serviceType = btn.getAttribute('data-service');
                 updateCalculator();
             });
         });
 
-        // Initialize
+        cleaningCheckbox.addEventListener('change', updateCalculator);
+
+        // Init
         updateCalculator();
         
-        // Dynamic Footer Year (bonus fix)
+        // Footer Year
         const yearSpan = document.getElementById('footer-year');
         if(yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
