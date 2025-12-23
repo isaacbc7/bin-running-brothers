@@ -7,19 +7,11 @@
     <meta name="description" content="The Bin Running Brothers provide reliable trash bin running services in North Georgia. Never miss trash day again.">
     <link rel="stylesheet" href="/css/styles.css">
 
-        <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/images/web-app-manifest-192x192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-
-    <!-- Social Sharing -->
-    <meta property="og:title" content="The Bin Running Brothers">
-    <meta property="og:description" content="North Georgia trash day, handled. Curbside bin running, pickup return, HOA plans & more.">
-    <meta property="og:image" content="https://thebinrunningbrothers.com/images/web-app-manifest-512x512.png">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://thebinrunningbrothers.com">
 </head>
 <body>
 <div class="page-shell">
@@ -27,7 +19,7 @@
         <div class="nav-inner">
             <div class="nav-left">
                 <div class="nav-logo-wrap">
-                    <img src="/images/TBRB.png"alt="The Bin Running Brothers logo" class="nav-logo">
+                    <img src="/images/TBRB.png" alt="The Bin Running Brothers logo" class="nav-logo">
                 </div>
                 <div class="nav-title-block">
                     <span class="nav-brand">The Bin Running Brothers</span>
@@ -42,14 +34,12 @@
                 <a href="/areas/" class="nav-link">Service areas</a>
                 <a href="/contact/" class="nav-link">Contact</a>
             </nav>
-            <a class="nav-cta" href="/contact/">
+            <a class="nav-cta" href="/get-started/">
                 <span>Get Started</span>
             </a>           
             <button class="nav-menu-toggle" type="button" aria-label="Toggle navigation">
                 <div class="nav-menu-toggle-bars">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </div>
             </button>
         </div>
@@ -64,6 +54,7 @@
             </div>
         </div>
     </header>
+
     <main>
         <section class="hero" id="hero">
             <div class="hero-copy">
@@ -79,10 +70,10 @@
                     The Bin Running Brothers make sure your bins are at the curb before the truck arrives and back at the house before you get home. Dependable, neighborhood-friendly service inspired by premium attention to detail.
                 </p>
                 <div class="hero-actions">
-                    <button class="btn-primary" type="button" data-scroll-target="#booking-strip">
+                    <a class="btn-primary" href="/get-started/">
                         <span>Get my trash day handled</span>
                         <span class="btn-icon-circle">→</span>
-                    </button>
+                    </a>
                     <a class="btn-secondary" href="/pricing/">
                         <div class="btn-icon-circle">★</div>
                         <span>View simple pricing</span>
@@ -93,66 +84,44 @@
                         <span class="hero-meta-label">Households Served</span>
                         <span class="hero-meta-value">150+ and counting</span>
                     </div>
-
                     <div class="hero-meta-item">
                         <span class="hero-meta-label">Coverage</span>
                         <span class="hero-meta-value">Jasper · Ball Ground · Canton</span>
                     </div>
                 </div>
             </div>
-            <aside class="hero-visual" aria-label="Live route preview">
 
+            <aside class="hero-visual" aria-label="Live route preview">
                 <div class="hero-card-main">
-            
-                    <!-- Large Logo -->
                     <div class="hero-logo-large-wrap">
-                        <img src="/images/TBRB.png"alt="The Bin Running Brothers" class="hero-logo-large">
+                        <img src="/images/TBRB.png" alt="The Bin Running Brothers" class="hero-logo-large">
                     </div>
-            
-                    <!-- Live Route Card -->
                     <div class="hero-route-card">
-            
                         <div class="hero-route-header">
-                            <span class="hero-route-title" id="route-title">Loading...</span>
-                            <span class="hero-route-chip" id="route-chip">Loading...</span>
+                            <span class="hero-route-title" id="route-title">Daily Route · North Georgia</span>
+                            <span class="hero-route-chip" id="route-chip">Active</span>
                         </div>
-            
                         <div class="hero-route-timeline">
                             <div class="hero-route-stop">
-                                <span class="hero-route-dot" id="route-health-dot"></span>
-                                <span id="route-health-text">Loading...</span>
-                            </div>
-                            <span class="hero-route-pill" id="curb-time-text">Loading...</span>
-                        </div>
-            
-                        <div class="hero-route-timeline">
-                            <div class="hero-route-stop">
-                                <span class="hero-route-dot"
-                                    style="background:#2ecc71; box-shadow:0 0 0 2px rgba(46,204,113,0.3);"></span>
-                                <span id="return-time-pill">Loading...</span>
+                                <span class="hero-route-dot" id="route-health-dot" style="background:#2ecc71;"></span>
+                                <span id="route-health-text">Route in good standing</span>
                             </div>
                         </div>
-            
+                        <div class="hero-route-timeline" style="margin-top:4px;">
+                             <span class="hero-route-pill" id="curb-time-text">Bins to curb by 6 PM</span>
+                             <span id="return-time-pill" style="font-size:10px; color:#888;">Returns 6–9 PM</span>
+                        </div>
                     </div>
-            
-                    <!-- Mini Tag -->
-                    <span class="hero-mini-tag" id="hero-mini-tag">Loading...</span>
-            
-                </div> <!-- END hero-card-main -->
-            
-                <!-- Floating Live Badge -->
-                <div class="hero-floating-badge">
-            
-                    <div class="hero-floating-badge-figure" id="floating-time">--:--</div>
-            
-                    <div class="hero-floating-badge-label" id="floating-label">Loading...</div>
-            
-                    <div class="hero-floating-badge-meter">
-                        <div class="hero-floating-badge-meter-inner" id="floating-meter-progress"></div>
-                    </div>
-            
+                    <span class="hero-mini-tag" id="hero-mini-tag">Live System</span>
                 </div>
-            
+                
+                <div class="hero-floating-badge">
+                    <div class="hero-floating-badge-figure" id="floating-time">--:--</div>
+                    <div class="hero-floating-badge-label" id="floating-label">Service Window</div>
+                    <div class="hero-floating-badge-meter">
+                        <div class="hero-floating-badge-meter-inner" id="floating-meter-progress" style="width: 50%;"></div>
+                    </div>
+                </div>
             </aside>                     
         </section>
 
@@ -165,7 +134,7 @@
                         Real experiences from households across North Georgia who upgraded their trash day.
                     </p>
                 </div>
-                <a href="/contact/" class="section-cta-link">
+                <a href="/get-started/" class="section-cta-link">
                     <span>Become a success story</span>
                     <span class="section-cta-link-icon">⟶</span>
                 </a>
@@ -174,7 +143,7 @@
                 <article class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
                     <p class="testimonial-quote">
-                        “We used to argue every Monday night about who would drag the bins down our steep driveway. Now they just magically appear at the curb and are back by the time we’re home.”
+                        “We used to argue every Monday night about who would drag the bins down our steep driveway. Now they just magically appear at the curb.”
                     </p>
                     <div class="testimonial-author-row">
                         <div>
@@ -187,7 +156,7 @@
                 <article class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
                     <p class="testimonial-quote">
-                        “I travel frequently for work. The Bin Running Brothers give me total peace of mind that my place doesn’t scream ‘nobody is home’ on trash day.”
+                        “I travel frequently for work. The Bin Running Brothers give me total peace of mind that my place doesn’t scream ‘nobody is home’.”
                     </p>
                     <div class="testimonial-author-row">
                         <div>
@@ -200,7 +169,7 @@
                 <article class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
                     <p class="testimonial-quote">
-                        “Our HOA loves how tidy the street looks now. Bins go out and come back on the same rhythm, and there are far fewer bins left out for days.”
+                        “Our HOA loves how tidy the street looks now. Bins go out and come back on the same rhythm.”
                     </p>
                     <div class="testimonial-author-row">
                         <div>
@@ -212,29 +181,6 @@
                 </article>
             </div>
         </section>
-
-        <section class="booking-strip" id="booking-strip">
-            <div class="booking-strip-copy">
-                <div class="booking-strip-title">Ready to never roll a bin again?</div>
-                <p class="booking-strip-body">
-                    Share a few details and we’ll send a personalized route quote within one business day.
-                </p>
-                <p class="booking-strip-meta">
-                    No contracts · Cancel anytime · Family-owned in North Georgia
-                </p>
-            </div>
-            <form class="booking-strip-form" id="quick-quote-form">
-                <input class="booking-input" type="text" name="street" placeholder="Street & city" required>
-                <select class="booking-select" name="frequency" aria-label="Service frequency">
-                    <option value="weekly">Weekly</option>
-                    <option value="biweekly">Every other week</option>
-                    <option value="monthly">Once a month</option>
-                </select>
-                <button class="booking-button" type="submit">
-                    Request Service
-                </button>
-            </form>
-        </section>
     </main>
 
     <footer class="footer">
@@ -242,7 +188,7 @@
             <div>
                 <div class="footer-brand-row">
                     <div class="nav-logo-wrap">
-                        <img src="/images/TBRB.png"alt="The Bin Running Brothers logo small">
+                        <img src="/images/TBRB.png" alt="The Bin Running Brothers logo small">
                     </div>
                     <span class="nav-brand">The Bin Running Brothers</span>
                 </div>
@@ -259,37 +205,9 @@
                     <span>© <span id="footer-year"></span> The Bin Running Brothers. All rights reserved.</span>
                 </div>
             </div>
-            <div class="footer-cols">
-                <div>
-                    <div class="footer-col-title">Plans</div>
-                    <a href="/pricing/" class="footer-link">Weekly routes</a>
-                    <a href="/pricing/" class="footer-link">Every other week</a>
-                    <a href="/pricing/" class="footer-link">Monthly coverage</a>
-                    <a href="/pricing/" class="footer-link">Vacation add-ons</a>
-                </div>
-                <div>
-                    <div class="footer-col-title">Company</div>
-                    <span class="footer-link">Family-owned</span>
-                    <span class="footer-link">Route safety</span>
-                    <span class="footer-link">Partner with us</span>
-                    <span class="footer-link">Careers (coming soon)</span>
-                </div>
-                <div>
-                    <div class="footer-col-title">Support</div>
-                    <span class="footer-link">FAQ</span>
-                    <span class="footer-link">Holiday schedule</span>
-                    <span class="footer-link">Service policies</span>
-                    <span class="footer-link">Privacy</span>
-                </div>
-            </div>
         </div>
     </footer>
 </div>
-<button class="floating-booking" type="button" data-scroll-target="#booking-strip">
-    <div class="floating-booking-dot"></div>
-    <span>Trash day help is available in your area.</span>
-    <span class="floating-booking-status">Get a quote</span>
-</button>
 <script src="/js/main.js"></script>
 </body>
 </html>
