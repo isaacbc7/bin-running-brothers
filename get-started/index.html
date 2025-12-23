@@ -260,5 +260,131 @@
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmED6YgmsNT8cE2-0k6qVBhcRS1R85vv4&libraries=places&callback=initGoogleAutocomplete" async defer></script>
 <script src="/js/main.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const signupForm = document.getElementById('signup-form');
+        const submitBtn = signupForm.querySelector('button[type="submit"]');
+        const submitText = document.getElementById('submit-text');
+    
+        // --- CONFIGURATION ---
+        const CONFIG = {
+            API_URL: "https://bcbpro.com/api/v1/leads/ingest",
+            
+            // This MUST match the key inside backend/app/api/public_leads.py
+            API_KEY: "bcb-secret-ingest-key-change-this", 
+            
+            // This MUST match the slug in your 'business_accounts' table
+            BUSINESS_SLUG: "tbrb", 
+            
+            // MAPPED UUIDS FROM YOUR DATABASE OUTPUT
+            PLANS: {
+                // "Weekly Service" -> Valet Trash (Weekly)
+                'weekly':   '68d8f46b-ed33-49d8-b3f2-3a195ff07fa3', 
+    
+                // "Every Other Week" -> Valet Trash (Bi-Weekly)
+                'biweekly': 'ca836d6f-cf78-41f4-93bf-cb3f98ad0fd8', 
+    
+                // "Monthly" -> Valet Trash (Monthly)
+                'monthly':  '26c7c98f-86ad-495e-b4eb-6be6ace936f3', 
+    
+                // "Vacation / One-time" -> One-Time Valet
+                'vacation': '2d89e515-6d52-4050-8b1f-85730c74d06c'  
+            }
+        };
+    
+        signupForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+    
+            // 1. UI Loading State
+            const originalText = submitText.innerText;
+            submitBtn.disabled = true;
+            submitText.innerText = "Processing...";
+            submitBtn.style.opacity = "0.7";
+    
+            // 2. Gather Data
+            const formData = new FormData(signupForm);
+            
+            const notes = [
+                `Gate/Access: ${formData.get('gateCode') || 'N/A'}`,
+                `Trash Day: ${formData.get('pickupDay')}`,
+                `Current Hauler: ${formData.get('hauler') || 'N/A'}`,
+                `Recycling Reminders: ${formData.get('recyclingReminders') ? 'Yes' : 'No'}`,
+                `Cleaning Interest: ${formData.get('cleaning') ? 'Yes' : 'No'}`
+            ].join('\n');
+    
+            // Select Plan ID
+            const selectedFreq = formData.get('frequency');
+            // Default to Weekly if selection is missing
+            const planId = CONFIG.PLANS[selectedFreq] || CONFIG.PLANS['weekly'];
+    
+            // 3. Build Payload
+            const payload = {
+                business_slug: CONFIG.BUSINESS_SLUG,
+                service_plan_id: planId,
+                
+                first_name: formData.get('firstName'),
+                last_name: formData.get('lastName'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                
+                street_address: formData.get('street'),
+                city: formData.get('city'),
+                state: "GA",
+                zip_code: formData.get('zip'),
+                
+                bin_count: parseInt(formData.get('binCount'), 10) || 1,
+                notes: notes
+            };
+    
+            try {
+                console.log("Submitting to BCBConnect:", payload);
+    
+                const response = await fetch(CONFIG.API_URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-BCB-INGEST-KEY": CONFIG.API_KEY
+                    },
+                    body: JSON.stringify(payload)
+                });
+    
+                const result = await response.json();
+    
+                if (response.ok && result.status === "success") {
+                    if (result.checkout_url) {
+                        // SUCCESS: Redirect to Stripe
+                        submitText.innerText = "Redirecting to Payment...";
+                        window.location.href = result.checkout_url;
+                    } else {
+                        // Fallback success (no payment link generated)
+                        showSuccessStep(payload.first_name, payload.phone);
+                    }
+                } else if (result.status === "exists") {
+                    alert("It looks like you already have an account! Please log in at bcbpro.com.");
+                    submitBtn.disabled = false;
+                    submitText.innerText = originalText;
+                } else {
+                    console.error("Submission Error:", result);
+                    alert("Something went wrong. Please try again.");
+                    submitBtn.disabled = false;
+                    submitText.innerText = originalText;
+                }
+    
+            } catch (error) {
+                console.error("Network Error:", error);
+                alert("Unable to connect to the server. Please check your connection.");
+                submitBtn.disabled = false;
+                submitText.innerText = originalText;
+            }
+        });
+    
+        function showSuccessStep(name, phone) {
+            document.querySelectorAll('.wizard-step').forEach(el => el.style.display = 'none');
+            document.getElementById('step-success').style.display = 'block';
+            document.getElementById('success-name').innerText = name;
+            document.getElementById('success-phone').innerText = phone;
+        }
+    });
+    </script>
 </body>
 </html>
