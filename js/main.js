@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // --- PRICING BUILDER LOGIC ---
+    // --- PRICING BUILDER LOGIC (Restored) ---
     const binCountEl = document.getElementById("binCount");
     const totalEl = document.getElementById("builderTotal");
     
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
 
-        // Pre-fill Frequency from URL
+        // Pre-fill Frequency
         const urlParams = new URLSearchParams(window.location.search);
         const freqParam = urlParams.get("frequency");
         if (freqParam) {
@@ -257,7 +257,6 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
 
-        // Clickable Step Indicators
         indicators.forEach((ind, index) => {
             ind.addEventListener("click", () => {
                 if (index < currentStep) showStep(index);
@@ -265,16 +264,82 @@ document.addEventListener("DOMContentLoaded", function() {
             ind.style.cursor = "pointer";
         });
 
-        // --- FORM SUBMIT HANDLER MODIFIED FOR API INTEGRATION ---
+        // Form Submit
         signupForm.addEventListener("submit", function(e) {
-            // We only check validation here. 
-            // The actual API submission is handled by the inline script in index.html.
-            if (!validateStep(currentStep)) {
-                e.preventDefault(); // Stop form
-                e.stopImmediatePropagation(); // Stop the API script from running
-            }
-            // If valid, we let the event continue so the API script can take over.
+            e.preventDefault();
+            if (!validateStep(currentStep)) return;
+
+            const submitBtn = signupForm.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = "Sending...";
+            submitBtn.disabled = true;
+
+            const formData = new FormData(signupForm);
+            const lead = {
+                id: crypto.randomUUID(),
+                timestamp: new Date().toISOString(),
+                contact: {
+                    firstName: formData.get("firstName"),
+                    lastName: formData.get("lastName"),
+                    email: formData.get("email"),
+                    phone: formData.get("phone")
+                },
+                address: {
+                    street: formData.get("street"),
+                    city: formData.get("city"),
+                    zip: formData.get("zip"),
+                    notes: formData.get("gateCode")
+                },
+                service: {
+                    frequency: formData.get("frequency"),
+                    pickupDay: formData.get("pickupDay"),
+                    binCount: formData.get("binCount"),
+                    hauler: formData.get("hauler"),
+                    addons: {
+                        cleaning: formData.get("cleaning") === "yes",
+                        recyclingReminders: formData.get("recyclingReminders") === "yes"
+                    }
+                }
+            };
+
+            // --- SEND DATA ---
+            console.log("🚀 SENDING LEAD:", lead);
+
+            // TODO: Uncomment for Formspree
+            /*
+            fetch("https://formspree.io/f/YOUR_FORMSPREE_ID", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(lead)
+            })
+            .then(res => {
+                if (res.ok) handleSuccess(lead);
+                else throw new Error("Formspree Error");
+            })
+            .catch(err => {
+                alert("There was a problem sending your request. Please try again.");
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
+            */
+
+            // Simulation for Development
+            setTimeout(() => {
+                handleSuccess(lead);
+            }, 1200);
         });
+
+        function handleSuccess(lead) {
+            const nameEl = document.getElementById("success-name");
+            const phoneEl = document.getElementById("success-phone");
+            
+            if (nameEl) nameEl.textContent = lead.contact.firstName;
+            if (phoneEl) phoneEl.textContent = lead.contact.phone;
+
+            steps.forEach(s => s.classList.remove("active"));
+            document.getElementById("step-success").classList.add("active");
+            indicators.forEach(ind => ind.classList.add("completed"));
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
     }
 
     // --- HOMEPAGE HERO LIVE UPDATER ---

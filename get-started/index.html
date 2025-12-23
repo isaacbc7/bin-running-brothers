@@ -12,81 +12,6 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/images/web-app-manifest-192x192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-
-    <style>
-        /* Restoring button and layout styling */
-        .form-actions {
-            display: flex;
-            align-items: center;
-            margin-top: 32px;
-            padding-top: 24px;
-            border-top: 1px solid #eee;
-        }
-        .form-actions.right {
-            justify-content: flex-end;
-        }
-        .form-actions.spread {
-            justify-content: space-between;
-        }
-        
-        .btn-primary {
-            background-color: #dc2626; /* Brand Red */
-            color: white;
-            font-weight: 700;
-            padding: 12px 32px;
-            border-radius: 9999px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            font-size: 16px;
-        }
-        .btn-primary:hover {
-            background-color: #b91c1c;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        .btn-primary:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .btn-text {
-            background: none;
-            border: none;
-            color: #6b7280;
-            font-weight: 500;
-            cursor: pointer;
-            padding: 8px 16px;
-            font-size: 16px;
-        }
-        .btn-text:hover {
-            color: #1f2937;
-            text-decoration: underline;
-        }
-
-        /* Ensure checkboxes in Step 3 align nicely */
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .checkbox-group:hover {
-            background-color: #f9fafb;
-        }
-        .checkbox-group input {
-            width: 20px;
-            height: 20px;
-            margin-right: 12px;
-            accent-color: #dc2626;
-        }
-    </style>
 </head>
 <body>
 <div class="page-shell">
@@ -109,7 +34,7 @@
                 <a href="/areas/" class="nav-link">Service areas</a>
                 <a href="/contact/" class="nav-link">Contact</a>
             </nav>
-            <a class="nav-cta" href="/get-started/">
+            <a class="nav-cta" href="https://bcbpro.com/book/tbrb">
                 <span>Get Started</span>
             </a>
             <button class="nav-menu-toggle" type="button" aria-label="Toggle navigation">
@@ -130,180 +55,24 @@
         </div>
     </header>
 
-    <main style="flex: 1; background: #f7f7f7; padding: 40px 0;">
+    <main style="flex: 1; background: #f7f7f7; padding: 60px 20px; display: flex; align-items: center; justify-content: center;">
         <section class="section">
-            <div class="wizard-container">
+            <div class="clean-map-card" style="max-width:600px; margin:auto; text-align:center; padding: 40px;">
                 
-                <div class="wizard-progress" aria-hidden="true">
-                    <div class="wizard-step-indicator active" id="indicator-1">
-                        <div class="step-circle">1</div>
-                        <span class="step-label">Contact</span>
-                    </div>
-                    <div class="wizard-step-indicator" id="indicator-2">
-                        <div class="step-circle">2</div>
-                        <span class="step-label">Address</span>
-                    </div>
-                    <div class="wizard-step-indicator" id="indicator-3">
-                        <div class="step-circle">3</div>
-                        <span class="step-label">Service</span>
-                    </div>
-                </div>
+                <h1 class="section-title" style="margin-bottom: 15px;">Ready to schedule service?</h1>
+                <p class="section-subtitle" style="margin: 0 auto 30px auto; max-width: 400px;">
+                    We use a secure booking portal to handle route scheduling and payments. Click below to continue.
+                </p>
 
-                <form id="signup-form" novalidate>
-    
-                    <div class="wizard-step active" id="step-1" role="tabpanel">
-                        <h1 class="wizard-title">Let’s get started</h1>
-                        <p class="wizard-subtitle">First, who are we helping?</p>
-                
-                        <div class="grid-2" style="gap: 16px;">
-                            <div class="form-group">
-                                <label class="form-label" for="firstName">First Name</label>
-                                <input type="text" class="form-input" id="firstName" name="firstName" required autocomplete="given-name">
-                                <div class="error-msg">Please enter your first name.</div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="lastName">Last Name</label>
-                                <input type="text" class="form-input" id="lastName" name="lastName" required autocomplete="family-name">
-                                <div class="error-msg">Please enter your last name.</div>
-                            </div>
-                        </div>
-                
-                        <div class="form-group">
-                            <label class="form-label" for="email">Email Address</label>
-                            <input type="email" class="form-input" id="email" name="email" required autocomplete="email">
-                            <div class="error-msg">Please enter a valid email address.</div>
-                        </div>
-                
-                        <div class="form-group">
-                            <label class="form-label" for="phone">Phone Number</label>
-                            <input type="tel" class="form-input" id="phone" name="phone" required autocomplete="tel" placeholder="(555) 555-5555" maxlength="14">
-                            <div class="error-msg">Please enter a valid phone number.</div>
-                        </div>
-                
-                        <div class="form-actions right">
-                            <button type="button" class="btn-primary" onclick="nextStep(2)">
-                                Next: Address
-                            </button>
-                        </div>
-                    </div>
-                
-                    <div class="wizard-step" id="step-2" role="tabpanel">
-                        <h2 class="wizard-title">Where do you need service?</h2>
-                        <p class="wizard-subtitle">We currently serve Jasper, Ball Ground, and Canton.</p>
-                
-                        <div class="form-group">
-                            <label class="form-label" for="street">Street Address</label>
-                            <input type="text" class="form-input" id="street" name="street" required autocomplete="off" placeholder="Start typing your address...">
-                            <div class="error-msg">Please enter your street address.</div>
-                        </div>
-                
-                        <div class="grid-2" style="gap: 16px;">
-                            <div class="form-group">
-                                <label class="form-label" for="city">City</label>
-                                <input type="text" class="form-input" id="city" name="city" required autocomplete="address-level2">
-                                <div class="error-msg">Please enter your city.</div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="zip">Zip Code</label>
-                                <input type="text" class="form-input" id="zip" name="zip" required autocomplete="postal-code" inputmode="numeric">
-                                <div class="error-msg">Please enter a valid zip code.</div>
-                            </div>
-                        </div>
-                
-                        <div class="form-group">
-                            <label class="form-label" for="gateCode">Gate Code / Access Instructions (Optional)</label>
-                            <textarea class="form-textarea" id="gateCode" name="gateCode" rows="2" placeholder="e.g. Gate code is #1234, or steep driveway."></textarea>
-                        </div>
-                
-                        <div class="form-actions spread">
-                            <button type="button" class="btn-text" onclick="prevStep(1)">Back</button>
-                            <button type="button" class="btn-primary" onclick="nextStep(3)">
-                                Next: Service Details
-                            </button>
-                        </div>
-                    </div>
-                
-                    <div id="step-3" class="wizard-step" style="display: none;">
-                        <div class="step-header">
-                            <h2 class="wizard-title">Customize your plan</h2>
-                            <p class="wizard-subtitle">Almost done. Tell us about your trash day.</p>
-                        </div>
-                    
-                        <div class="space-y-4">
-                            <div class="form-group">
-                                <label class="form-label">How often do you need help?</label>
-                                <select name="frequency" class="form-input" required>
-                                    <option value="weekly">Weekly Service (Best Value)</option>
-                                    <option value="biweekly">Bi-Weekly Service</option>
-                                    <option value="monthly">Monthly Service</option>
-                                    <option value="vacation">One-Time / Vacation Service</option>
-                                </select>
-                            </div>
-                    
-                            <div class="grid-2" style="gap: 16px;">
-                                <div class="form-group">
-                                    <label class="form-label">Trash Pickup Day</label>
-                                    <select name="pickupDay" class="form-input" required>
-                                        <option value="" disabled selected>Select Day</option>
-                                        <option value="Monday">Monday</option>
-                                        <option value="Tuesday">Tuesday</option>
-                                        <option value="Wednesday">Wednesday</option>
-                                        <option value="Thursday">Thursday</option>
-                                        <option value="Friday">Friday</option>
-                                    </select>
-                                </div>
-                    
-                                <div class="form-group">
-                                    <label class="form-label">Number of Bins</label>
-                                    <select name="binCount" class="form-input">
-                                        <option value="1">1 Bin</option>
-                                        <option value="2">2 Bins</option>
-                                        <option value="3">3 Bins</option>
-                                        <option value="4">4 Bins</option>
-                                    </select>
-                                </div>
-                            </div>
-                    
-                            <div class="form-group">
-                                <label class="form-label">Current Trash Provider (Optional)</label>
-                                <input type="text" name="hauler" placeholder="e.g. Waste Management, Republic, etc." class="form-input">
-                            </div>
-                    
-                            <div style="margin-top: 20px;">
-                                <label class="checkbox-group">
-                                    <input type="checkbox" name="cleaning">
-                                    <span style="font-size: 14px; color: #374151;">Include bin cleaning info?</span>
-                                </label>
-                    
-                                <label class="checkbox-group">
-                                    <input type="checkbox" name="recyclingReminders">
-                                    <span style="font-size: 14px; color: #374151;">Enable recycling day SMS reminders?</span>
-                                </label>
-                            </div>
-                        </div>
-                    
-                        <div class="form-actions spread">
-                            <button type="button" class="btn-text" onclick="prevStep(2)">Back</button>
-                            <button type="submit" class="btn-primary">
-                                <span id="submit-text">Complete Request</span>
-                            </button>
-                        </div>
-                    </div>
-                
-                    <div class="wizard-step" id="step-success" role="tabpanel" style="text-align: center;">
-                        <span class="success-icon" style="font-size: 60px; display:block; margin-bottom: 20px;">🎉</span>
-                        <h2 class="wizard-title">We’ve got it!</h2>
-                        <p class="wizard-subtitle">Thanks <span id="success-name"></span>. We have received your details.</p>
-                        
-                        <div style="background: #f0fdf4; border: 1px solid #dcfce7; color: #166534; padding: 20px; border-radius: 12px; margin-bottom: 30px; text-align: left;">
-                            <strong style="display:block; margin-bottom: 8px;">What happens next?</strong>
-                            We will text you at <strong id="success-phone"></strong> within 24 hours to confirm your route availability and final price.
-                        </div>
-                
-                        <a href="/" class="btn-secondary">Return Home</a>
-                    </div>
-                
-                </form>
+                <a class="btn-primary" href="https://bcbpro.com/book/tbrb">
+                    <span>Go to Booking Portal</span>
+                    <span class="btn-icon-circle">→</span>
+                </a>
+
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 24px;">
+                    You will be redirected to bcbpro.com to finalize your account.
+                </p>
+
             </div>
         </section>
     </main>
@@ -333,110 +102,6 @@
         </div>
     </footer>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmED6YgmsNT8cE2-0k6qVBhcRS1R85vv4&libraries=places&callback=initGoogleAutocomplete" async defer></script>
 <script src="/js/main.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const signupForm = document.getElementById('signup-form');
-        const submitBtn = signupForm.querySelector('button[type="submit"]');
-        const submitText = document.getElementById('submit-text');
-    
-        // --- CONFIGURATION ---
-        const CONFIG = {
-            API_URL: "https://bcbpro.com/api/v1/leads/ingest",
-            API_KEY: "bcb-secret-ingest-key-change-this", 
-            BUSINESS_SLUG: "tbrb", 
-            PLANS: {
-                'weekly':   '68d8f46b-ed33-49d8-b3f2-3a195ff07fa3', 
-                'biweekly': 'ca836d6f-cf78-41f4-93bf-cb3f98ad0fd8', 
-                'monthly':  '26c7c98f-86ad-495e-b4eb-6be6ace936f3', 
-                'vacation': '2d89e515-6d52-4050-8b1f-85730c74d06c'  
-            }
-        };
-    
-        signupForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-    
-            const originalText = submitText.innerText;
-            submitBtn.disabled = true;
-            submitText.innerText = "Processing...";
-            submitBtn.style.opacity = "0.7";
-    
-            const formData = new FormData(signupForm);
-            
-            const notes = [
-                `Gate/Access: ${formData.get('gateCode') || 'N/A'}`,
-                `Trash Day: ${formData.get('pickupDay')}`,
-                `Current Hauler: ${formData.get('hauler') || 'N/A'}`,
-                `Recycling Reminders: ${formData.get('recyclingReminders') ? 'Yes' : 'No'}`,
-                `Cleaning Interest: ${formData.get('cleaning') ? 'Yes' : 'No'}`
-            ].join('\n');
-    
-            const selectedFreq = formData.get('frequency');
-            const planId = CONFIG.PLANS[selectedFreq] || CONFIG.PLANS['weekly'];
-    
-            const payload = {
-                business_slug: CONFIG.BUSINESS_SLUG,
-                service_plan_id: planId,
-                first_name: formData.get('firstName'),
-                last_name: formData.get('lastName'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                street_address: formData.get('street'),
-                city: formData.get('city'),
-                state: "GA",
-                zip_code: formData.get('zip'),
-                bin_count: parseInt(formData.get('binCount'), 10) || 1,
-                notes: notes
-            };
-    
-            try {
-                console.log("Submitting to BCBConnect:", payload);
-    
-                const response = await fetch(CONFIG.API_URL, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-BCB-INGEST-KEY": CONFIG.API_KEY
-                    },
-                    body: JSON.stringify(payload)
-                });
-    
-                const result = await response.json();
-    
-                if (response.ok && result.status === "success") {
-                    if (result.checkout_url) {
-                        submitText.innerText = "Redirecting to Payment...";
-                        window.location.href = result.checkout_url;
-                    } else {
-                        showSuccessStep(payload.first_name, payload.phone);
-                    }
-                } else if (result.status === "exists") {
-                    alert("It looks like you already have an account! Please log in at bcbpro.com.");
-                    submitBtn.disabled = false;
-                    submitText.innerText = originalText;
-                } else {
-                    console.error("Submission Error:", result);
-                    alert("Something went wrong. Please try again.");
-                    submitBtn.disabled = false;
-                    submitText.innerText = originalText;
-                }
-    
-            } catch (error) {
-                console.error("Network Error:", error);
-                alert("Unable to connect to the server. Please check your connection.");
-                submitBtn.disabled = false;
-                submitText.innerText = originalText;
-            }
-        });
-    
-        function showSuccessStep(name, phone) {
-            document.querySelectorAll('.wizard-step').forEach(el => el.style.display = 'none');
-            document.getElementById('step-success').style.display = 'block';
-            document.getElementById('success-name').innerText = name;
-            document.getElementById('success-phone').innerText = phone;
-        }
-    });
-    </script>
 </body>
 </html>
