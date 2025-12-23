@@ -105,11 +105,9 @@
                             <div class="error-msg">Please enter a valid phone number.</div>
                         </div>
                 
-                        <div class="wizard-actions">
-                            <button type="button" class="btn-back" disabled style="opacity:0; pointer-events:none;">Back</button>
-                            <button type="button" class="btn-primary next-step">
-                                <span>Next: Address</span>
-                                <span class="btn-icon-circle">→</span>
+                        <div class="flex justify-end mt-8 pt-4 border-t border-gray-100">
+                            <button type="button" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5" onclick="nextStep(2)">
+                                Next: Address
                             </button>
                         </div>
                     </div>
@@ -142,11 +140,11 @@
                             <textarea class="form-textarea" id="gateCode" name="gateCode" rows="2" placeholder="e.g. Gate code is #1234, or steep driveway."></textarea>
                         </div>
                 
-                        <div class="wizard-actions">
-                            <button type="button" class="btn-back prev-step">Back</button>
-                            <button type="button" class="btn-primary next-step">
-                                <span>Next: Service Details</span>
-                                <span class="btn-icon-circle">→</span>
+                        <div class="flex justify-between mt-8 pt-4 border-t border-gray-100">
+                            <button type="button" class="text-gray-500 hover:text-gray-800 font-medium px-4 py-2" onclick="prevStep(1)">Back</button>
+                            
+                            <button type="button" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5" onclick="nextStep(3)">
+                                Next: Service Details
                             </button>
                         </div>
                     </div>
@@ -212,7 +210,8 @@
                         </div>
                     
                         <div class="flex justify-between mt-8 pt-4 border-t border-gray-100">
-                            <button type="button" class="text-gray-500 hover:text-gray-800 font-medium px-4 py-2" onclick="prevStep(3)">Back</button>
+                            <button type="button" class="text-gray-500 hover:text-gray-800 font-medium px-4 py-2" onclick="prevStep(2)">Back</button>
+                            
                             <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                                 <span id="submit-text">Complete Request</span>
                             </button>
