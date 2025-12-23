@@ -7,6 +7,37 @@
         <meta name="description" content="Simple, transparent pricing for trash bin running in North Georgia.">
     
         <link rel="stylesheet" href="/css/styles.css">
+        
+        <style>
+            .builder-service-options {
+                display: flex;
+                gap: 8px;
+                margin-top: 8px;
+                flex-wrap: wrap;
+            }
+            .service-btn {
+                flex: 1;
+                padding: 10px;
+                border: 1px solid #ccc;
+                background: #fff;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: 500;
+                font-size: 0.9rem;
+                min-width: 80px;
+                transition: all 0.2s ease;
+            }
+            .service-btn.active {
+                background-color: #000; /* Assuming black based on your logo/branding */
+                color: #fff;
+                border-color: #000;
+            }
+            .service-btn:hover {
+                border-color: #000;
+            }
+            /* Hide the frequency button styles from previous version if necessary, 
+               or reuse them if they match .service-btn */
+        </style>
     
         <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
@@ -93,10 +124,11 @@
                         <button id="binPlus" type="button">+</button>
                     </div>
 
-                    <label class="builder-label" style="margin-top:16px;">Pickup frequency</label>
-                    <div class="builder-frequency">
-                        <button class="freq-btn active" data-frequency="weekly">Weekly</button>
-                        <button class="freq-btn" data-frequency="twice">Twice a week</button>
+                    <label class="builder-label" style="margin-top:16px;">Service Option</label>
+                    <div class="builder-service-options">
+                        <button class="service-btn active" data-service="curb_return">Curb & Return</button>
+                        <button class="service-btn" data-service="to_curb">To Curb</button>
+                        <button class="service-btn" data-service="return">Return</button>
                     </div>
 
                     <label class="builder-label" style="margin-top:16px;">
@@ -109,9 +141,8 @@
 
                     <div class="builder-results">
                         <h3 class="builder-results-title">Your estimated price</h3>
-                        <div id="builderTotal" class="builder-total">$25/mo</div>
-                        <div id="builderBreakdown" class="builder-breakdown">
-                            </div>
+                        <div id="builderTotal" class="builder-total">$35/mo</div>
+                        <div id="builderBreakdown" class="builder-breakdown">1 bin • Curb & Return</div>
                     </div>
                 </div>
 
@@ -186,7 +217,88 @@
     <span>Trash day help is available in your area.</span>
     <span class="floating-booking-status">Get Started</span>
 </a>
+
 <script src="/js/main.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Elements
+        const binMinus = document.getElementById('binMinus');
+        const binPlus = document.getElementById('binPlus');
+        const binCountEl = document.getElementById('binCount');
+        const serviceBtns = document.querySelectorAll('.service-btn');
+        const builderTotal = document.getElementById('builderTotal');
+        const builderBreakdown = document.getElementById('builderBreakdown');
+        
+        // State
+        let count = 1;
+        let serviceType = 'curb_return'; // 'curb_return', 'to_curb', or 'return'
+        
+        // Base Pricing Configuration
+        const PRICING = {
+            curb_return: { base: 35, additional: 5, label: "Curb & Return" },
+            to_curb:     { base: 20, additional: 5, label: "To Curb" },
+            return:      { base: 20, additional: 5, label: "Return Only" }
+        };
+
+        // Update UI Function
+        function updateCalculator() {
+            // Calculate
+            const plan = PRICING[serviceType];
+            
+            // Formula: Base price (covers 1st bin) + (Additional bins * fee)
+            // Note: If bins = 1, additional is 0.
+            const additionalBins = Math.max(0, count - 1);
+            const total = plan.base + (additionalBins * plan.additional);
+            
+            // Render
+            binCountEl.textContent = count;
+            builderTotal.textContent = `$${total}/mo`;
+            
+            // Helper text for clarity
+            let breakdownText = `${count} bin${count > 1 ? 's' : ''} • ${plan.label}`;
+            if (additionalBins > 0) {
+                 breakdownText += ` (+$${additionalBins * plan.additional} extra bins)`;
+            }
+            builderBreakdown.textContent = breakdownText;
+        }
+
+        // Event Listeners: Bins
+        binMinus.addEventListener('click', () => {
+            if (count > 1) {
+                count--;
+                updateCalculator();
+            }
+        });
+
+        binPlus.addEventListener('click', () => {
+            if (count < 10) { // arbitrary max of 10
+                count++;
+                updateCalculator();
+            }
+        });
+
+        // Event Listeners: Service Type
+        serviceBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all
+                serviceBtns.forEach(b => b.classList.remove('active'));
+                // Add to clicked
+                btn.classList.add('active');
+                // Update state
+                serviceType = btn.getAttribute('data-service');
+                updateCalculator();
+            });
+        });
+
+        // Initialize
+        updateCalculator();
+        
+        // Dynamic Footer Year (bonus fix)
+        const yearSpan = document.getElementById('footer-year');
+        if(yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+</script>
 
 </body>
 </html>
