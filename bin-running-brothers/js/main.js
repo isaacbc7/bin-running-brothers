@@ -2,6 +2,29 @@
    THE BIN RUNNING BROTHERS - MAIN JS
    ========================================= */
 
+/* --- 0. LAYOUT PARTIALS (Header/Footer) --- */
+async function injectPartial(placeholderId, url) {
+    const host = document.getElementById(placeholderId);
+    if (!host) return;
+    try {
+        const resp = await fetch(url, { cache: "no-cache" });
+        if (!resp.ok) return;
+        const html = await resp.text();
+        // Replace the placeholder node entirely with the partial HTML
+        host.outerHTML = html;
+    } catch (e) {
+        // If fetch fails (offline, file://, etc), page still works with inline fallback
+        console.warn(`Partial load failed for ${url}`, e);
+    }
+}
+
+async function injectLayout() {
+    await Promise.all([
+        injectPartial("site-header", "/partials/header.html"),
+        injectPartial("site-footer", "/partials/footer.html"),
+    ]);
+}
+
 /* --- 1. GOOGLE AUTOCOMPLETE (Global Scope) --- */
 window.initGoogleAutocomplete = function() {
     console.log("🗺️ Google Maps API Loaded");
@@ -56,7 +79,8 @@ window.initGoogleAutocomplete = function() {
 };
 
 /* --- 2. DOM READY LOGIC --- */
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
+    await injectLayout();
     console.log("🚀 Main Script Loaded");
 
     // -- UTILITIES --
@@ -109,62 +133,136 @@ document.addEventListener("DOMContentLoaded", function() {
         quickForm.addEventListener("submit", function(event) {
             event.preventDefault();
             const frequency = quickForm.frequency.value;
-            window.location.href = "/get-started/?frequency=" + frequency;
+            // Booking flow lives on BCBPro (source of truth)
+            window.location.href = "https://bcbpro.com/book/the-bin-running-brothers";
         });
     }
 
-    // --- PRICING BUILDER LOGIC (Restored) ---
+    // --- PRICING CALCULATOR (Frequency + Service Type) ---
     const binCountEl = document.getElementById("binCount");
     const totalEl = document.getElementById("builderTotal");
-    
-    // Check if we are on the PRICING page (Get Started also has #binCount but no #builderTotal)
-    if (binCountEl && totalEl && binCountEl.tagName !== "SELECT") {
+    const breakdownEl = document.getElementById("builderBreakdown");
+
+    // Only run on the pricing calculator card
+    if (binCountEl && totalEl && breakdownEl && binCountEl.tagName !== "SELECT") {
         const minus = document.getElementById("binMinus");
         const plus = document.getElementById("binPlus");
-        const freqBtns = document.querySelectorAll(".freq-btn");
-        const cleaningCheckbox = document.getElementById("addCleaning");
-        const breakdownEl = document.getElementById("builderBreakdown");
+
+        const serviceBtns = Array.from(document.querySelectorAll('[data-service]'));
+        const frequencyBtns = Array.from(document.querySelectorAll('[data-frequency]'));
+        const cleaningBtns = Array.from(document.querySelectorAll('[data-cleaning]'));
+
+        const FREQUENCY_LABELS = {
+            weekly: "Weekly",
+            biweekly: "Every other week",
+            monthly: "Monthly",
+            onetime: "One time / Vacation",
+        };
+
+        const PRICE_TABLE = {
+            weekly: {
+                curb_return: { base: 40, additional: 5, label: "Curb & Return" },
+                to_curb: { base: 25, additional: 5, label: "To Curb" },
+                return: { base: 25, additional: 5, label: "Return" },
+            },
+            biweekly: {
+                curb_return: { base: 30, additional: 5, label: "Curb & Return" },
+                to_curb: { base: 20, additional: 5, label: "To Curb" },
+                return: { base: 20, additional: 5, label: "Return" },
+            },
+            monthly: {
+                curb_return: { base: 25, additional: 5, label: "Curb & Return" },
+                to_curb: { base: 15, additional: 5, label: "To Curb" },
+                return: { base: 15, additional: 5, label: "Return" },
+            },
+            onetime: {
+                curb_return: { base: 45, additional: 5, label: "Curb & Return" },
+                to_curb: { base: 30, additional: 5, label: "To Curb" },
+                return: { base: 30, additional: 5, label: "Return" },
+            },
+        };
 
         let bins = 1;
+        let serviceType = "curb_return";
         let frequency = "weekly";
+        let cleaning = "none"; // "none" | "yes"
 
-        function calculate() {
-            let base = 25;
-            let addBin = 5;
-            let weeklyTotal = base + (bins - 1) * addBin;
-            let total = weeklyTotal;
-
-            if (frequency === "twice") {
-                total = Math.round(weeklyTotal * 1.5);
-            }
-
-            let cleaning = cleaningCheckbox?.checked ? 15 + (bins - 1) * 5 : 0;
-            totalEl.textContent = `$${total + cleaning}/mo`;
-
-            if (breakdownEl) {
-                breakdownEl.innerHTML = `
-                    Base service: $${total}/mo<br>
-                    ${cleaning ? `Cleaning add-on: +$${cleaning}/mo<br>` : ""}
-                    Bins: ${bins}<br>
-                    Frequency: ${frequency === "weekly" ? "Weekly" : "Twice weekly"}
-                `;
-            }
+        function setActive(groupBtns, predicate) {
+            groupBtns.forEach((b) => b.classList.toggle("active", predicate(b)));
         }
 
-        if (minus) minus.addEventListener("click", () => { if (bins > 1) { bins--; binCountEl.textContent = bins; calculate(); } });
-        if (plus) plus.addEventListener("click", () => { bins++; binCountEl.textContent = bins; calculate(); });
-        
-        freqBtns.forEach(btn => {
+        function getCleaningAddOnTotal() {
+            if (cleaning !== "yes") return 0;
+            const additionalBins = Math.max(0, bins - 1);
+
+            // Monthly cleaning (all recurring frequencies) vs one-time cleaning
+            if (frequency === "onetime") {
+                return 65 + additionalBins * 10;
+            }
+            return 15 + additionalBins * 10;
+        }
+
+        function calculate() {
+            const plan = PRICE_TABLE[frequency]?.[serviceType];
+            if (!plan) return;
+
+            const additionalBins = Math.max(0, bins - 1);
+            let total = plan.base + additionalBins * plan.additional;
+
+            const cleaningAddOn = getCleaningAddOnTotal();
+            total += cleaningAddOn;
+
+            binCountEl.textContent = String(bins);
+
+            const isOneTime = frequency === "onetime";
+            totalEl.textContent = isOneTime ? `$${total} (one-time)` : `$${total}/mo`;
+
+            let breakdown = `${FREQUENCY_LABELS[frequency]} • ${bins} bin${bins > 1 ? "s" : ""} • ${plan.label}`;
+            if (additionalBins > 0) breakdown += ` (+$${additionalBins * plan.additional} extra bins)`;
+            if (cleaningAddOn > 0) {
+                breakdown += isOneTime
+                    ? ` • Cleaning +$${cleaningAddOn} (one-time)`
+                    : ` • Cleaning +$${cleaningAddOn}/mo`;
+            }
+            breakdownEl.textContent = breakdown;
+        }
+
+        if (minus) minus.addEventListener("click", () => { if (bins > 1) { bins--; calculate(); } });
+        if (plus) plus.addEventListener("click", () => { bins++; calculate(); });
+
+        serviceBtns.forEach((btn) => {
             btn.addEventListener("click", () => {
-                freqBtns.forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                frequency = btn.dataset.frequency;
+                serviceType = btn.getAttribute("data-service") || serviceType;
+                setActive(serviceBtns, (b) => b === btn);
                 calculate();
             });
         });
 
-        if (cleaningCheckbox) cleaningCheckbox.addEventListener("change", calculate);
-        calculate(); // Initialize
+        frequencyBtns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                frequency = btn.getAttribute("data-frequency") || frequency;
+                setActive(frequencyBtns, (b) => b === btn);
+                calculate();
+            });
+        });
+
+        cleaningBtns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                cleaning = btn.getAttribute("data-cleaning") || cleaning;
+                setActive(cleaningBtns, (b) => b === btn);
+                calculate();
+            });
+        });
+
+        // Initialize active states from markup (first button in each group)
+        const activeServiceBtn = serviceBtns.find((b) => b.classList.contains("active"));
+        if (activeServiceBtn?.getAttribute("data-service")) serviceType = activeServiceBtn.getAttribute("data-service");
+        const activeFrequencyBtn = frequencyBtns.find((b) => b.classList.contains("active"));
+        if (activeFrequencyBtn?.getAttribute("data-frequency")) frequency = activeFrequencyBtn.getAttribute("data-frequency");
+        const activeCleaningBtn = cleaningBtns.find((b) => b.classList.contains("active"));
+        if (activeCleaningBtn?.getAttribute("data-cleaning")) cleaning = activeCleaningBtn.getAttribute("data-cleaning");
+
+        calculate();
     }
 
     /* --- GET STARTED WIZARD LOGIC --- */

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Share Your Story | The Bin Running Brothers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Share your experience with The Bin Running Brothers.">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/web-app-manifest-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta property="og:title" content="Share Your Story | The Bin Running Brothers">
+    <meta property="og:description" content="Tell us what trash day feels like now that we run your bins.">
+    <meta property="og:image" content="https://thebinrunningbrothers.com/images/web-app-manifest-512x512.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thebinrunningbrothers.com/success-story/">
+</head>
+<body>
+<div class="page-shell">
+    <div id="site-header"></div>
+
+    <main>
+        <section class="section" id="success-story">
+            <div class="section-heading">
+                <div class="section-title-block">
+                    <span class="section-eyebrow">Testimonials</span>
+                    <h1 class="section-title">Share your story</h1>
+                    <p class="section-subtitle">
+                        We’d love to hear what changed for you. This goes straight to the brothers.
+                    </p>
+                </div>
+            </div>
+
+            <div class="contact-layout">
+                <aside class="contact-card">
+                    <h3 style="margin:0;">What to include</h3>
+                    <p style="margin:0; color:var(--text-muted); font-size:13px; line-height:1.6;">
+                        A couple sentences is perfect. Tell us what trash day used to feel like, what feels different now, and any neighborhood details you’re okay sharing.
+                    </p>
+                    <div style="margin-top:14px;">
+                        <div style="margin-bottom:10px; font-size:12px; color:var(--text-muted); font-weight:600; letter-spacing:0.02em;">
+                            Not a customer?
+                        </div>
+                        <a class="btn-secondary" href="https://bcbpro.com/book/the-bin-running-brothers">
+                            <span class="btn-icon-circle">→</span>
+                            <span>Get Started</span>
+                        </a>
+                    </div>
+                </aside>
+
+                <div class="contact-card">
+                    <form id="success-story-form" class="contact-form">
+                        <div class="field-row">
+                            <div>
+                                <label class="field-label" for="story-name">Name</label>
+                                <input class="field-input" id="story-name" name="name" type="text" placeholder="First name is fine">
+                            </div>
+                            <div>
+                                <label class="field-label" for="story-city">City</label>
+                                <input class="field-input" id="story-city" name="city" type="text" placeholder="Jasper, Ball Ground, Canton…">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="field-label" for="story-message">Your story</label>
+                            <textarea class="field-textarea" id="story-message" name="message" required placeholder="Example: We used to argue about bins every week… now they just appear at the curb and come back the next day."></textarea>
+                        </div>
+                        <button class="btn-primary" type="submit">
+                            <span>Submit story</span>
+                            <span class="btn-icon-circle">✓</span>
+                        </button>
+                        <p class="section-subtitle" style="max-width:none; font-size:12px;">
+                            By submitting, you’re giving us permission to quote your story on the site (we’ll keep it respectful and can anonymize details if you prefer).
+                        </p>
+                    </form>
+
+                    <div id="success-story-thanks" class="contact-card" style="display:none; margin-top:16px;">
+                        <h3 style="margin:0 0 6px;">Thank you — we got it.</h3>
+                        <p style="margin:0; color:var(--text-muted); font-size:13px; line-height:1.6;">
+                            If you have 30 seconds, leaving a quick Google review helps a ton.
+                        </p>
+                        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                            <a class="btn-primary" href="https://www.google.com/search?sca_esv=20541e4f21a9d7f7&sxsrf=ANbL-n4PpQ1fO68oRkI-ZrKLr0tCtvLCnA:1769026201144&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOZuwyT9PXCy5J4b6AWW91yfC3GZmUyYHcN__WnrTMpN-8U__0P7-ZTYiT51g9jMQxMaeKMeslU9asfkvluOt09gNhj3ubA9RXGoWk5B0pa19mcRXLg%3D%3D&q=The+Bin+Cleaning+Brothers+Reviews&sa=X&ved=2ahUKEwjA-MSSuJ2SAxVRpIkEHR3RCMEQ0bkNegQIRhAF&biw=1531&bih=888&dpr=2&aic=0" target="_blank" rel="noopener">
+                                <span>Leave a Google review</span>
+                                <span class="btn-icon-circle">↗</span>
+                            </a>
+                            <a class="btn-secondary" href="/">
+                                <span class="btn-icon-circle">←</span>
+                                <span>Back home</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+</div>
+<script src="/js/main.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("success-story-form");
+        const thanks = document.getElementById("success-story-thanks");
+        if (!form || !thanks) return;
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            // For now: client-side only. (Hook this up to your form tool later.)
+            form.style.display = "none";
+            thanks.style.display = "block";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    });
+</script>
+</body>
+</html>

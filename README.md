@@ -1,15 +1,42 @@
-# React + Vite
+# The Bin Running Brothers Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the website for The Bin Running Brothers trash service.
 
-Currently, two official plugins are available:
+## Project Structure
+
+- `bin-running-brothers/` - Static HTML site (main website)
+- `src/` - React application (if needed for future features)
+
+## Local Preview
+
+To preview the static site locally before pushing changes live, you have two options:
+
+### Option 1: Using the preview script (Recommended)
+```bash
+./preview.sh
+```
+
+### Option 2: Using npm
+```bash
+npm run preview:site
+```
+
+### Option 3: Manual Python server
+```bash
+cd bin-running-brothers
+python3 -m http.server 8000
+```
+
+Then open your browser to: **http://localhost:8000**
+
+Press `Ctrl+C` to stop the server when you're done.
+
+## React + Vite
+
+The React/Vite setup is available for future development. Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
 ## Expanding the ESLint configuration
 

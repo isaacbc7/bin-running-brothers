@@ -1,5 +1,7 @@
 :root {
-    --brand-red: #c0392b;
+    /* Brand red (kept distinctly red — not pink when used with glass) */
+    --brand-red: #c83a2f;
+    --brand-red-rgb: 200, 58, 47;
     --brand-dark: #222222;
     --brand-light: #f7f7f7;
     --accent-gold: #f1c40f;
@@ -16,6 +18,16 @@
     --transition-fast: 200ms ease;
     --transition-med: 320ms cubic-bezier(.4,0,.2,1);
     --max-width: 1160px;
+
+    /* Frosted glass tokens (iOS-like) */
+    --glass-bg: rgba(255,255,255,0.68);
+    --glass-border: rgba(255,255,255,0.55);
+    --glass-stroke: rgba(0,0,0,0.06);
+    --glass-shadow: 0 10px 26px rgba(0,0,0,0.06);
+
+    /* Subtle red glow (very light) */
+    --red-glow: 0 10px 28px rgba(var(--brand-red-rgb),0.16);
+    --red-glow-hover: 0 12px 34px rgba(var(--brand-red-rgb),0.20);
 }
 
 * {
@@ -50,9 +62,30 @@ img {
     top: 0;
     z-index: 40;
     padding-bottom: 4px;
-    backdrop-filter: blur(24px);
-    background: linear-gradient(90deg, rgba(255,255,255,0.92), rgba(255,255,255,0.9));
-    border-bottom: 1px solid rgba(0,0,0,0.04);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    /* iOS-like material: layered translucency + slight highlight gradient */
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.78),
+        rgba(255,255,255,0.54)
+    );
+    border-bottom: 1px solid var(--glass-stroke);
+    box-shadow: var(--glass-shadow);
+    overflow: hidden;
+}
+
+/* Subtle “material noise” overlay (keeps the glass from looking flat) */
+.nav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.10;
+    background-image:
+        radial-gradient(rgba(0,0,0,0.28) 0.6px, transparent 0.7px);
+    background-size: 3px 3px;
+    mix-blend-mode: overlay;
 }
 .nav-inner {
     max-width: var(--max-width);
@@ -118,15 +151,54 @@ img {
 .nav-link {
     padding: 6px 8px;
     border-radius: 999px;
+    border: 1px solid transparent; /* prevents layout shift when active adds a border */
     transition: background var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
 }
 .nav-link:hover {
-    background: rgba(0,0,0,0.04);
+    background: rgba(255,255,255,0.38);
     transform: translateY(-1px);
 }
 .nav-link-active {
-    background: var(--brand-dark);
+    /* Frosted + brand red tint (iOS-like pill) */
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    backdrop-filter: blur(14px) saturate(180%);
+    background: linear-gradient(
+        to bottom,
+        rgba(var(--brand-red-rgb),0.92),
+        rgba(var(--brand-red-rgb),0.78)
+    );
     color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.52);
+    /* Slightly darker pill, dimmer glow */
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        0 8px 18px rgba(var(--brand-red-rgb),0.10);
+    text-shadow: 0 1px 0 rgba(0,0,0,0.10);
+    font-weight: 650;
+}
+
+/* Keep active pill visible on hover (don’t wash out to white) */
+.nav-link-active:hover {
+    background: linear-gradient(
+        to bottom,
+        rgba(var(--brand-red-rgb),0.96),
+        rgba(var(--brand-red-rgb),0.84)
+    );
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.20),
+        0 8px 18px rgba(var(--brand-red-rgb),0.12);
+}
+
+/* Make logo + brand clickable without changing layout */
+.nav-home-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: inherit;
+    text-decoration: none;
+}
+.nav-home-link:hover {
+    opacity: 0.95;
 }
 
 .nav-cta {
@@ -135,21 +207,49 @@ img {
     justify-content: center;
     padding: 10px 20px;
     border-radius: 999px;
-    background: var(--brand-red);
+    /* Tinted glass CTA so it matches the header material */
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%);
+    background: linear-gradient(
+        to bottom,
+        rgba(var(--brand-red-rgb),0.92),
+        rgba(var(--brand-red-rgb),0.78)
+    );
     color: #ffffff;
     font-size: 14px;
     font-weight: 600;
-    border: none;
-    /* Tighter shadow, less colored glow */
-    box-shadow: 0 4px 12px rgba(192,57,43,0.25); 
+    border: 1px solid rgba(255,255,255,0.50);
+    /* Dimmer shadow/glow (more “liquid glass”, less neon) */
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        0 10px 22px rgba(0,0,0,0.08),
+        0 10px 22px rgba(var(--brand-red-rgb),0.10);
     cursor: pointer;
     transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
 }
 
+.nav-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    pointer-events: none;
+    /* subtle top highlight like iOS materials */
+    background: linear-gradient(to bottom, rgba(255,255,255,0.22), rgba(255,255,255,0));
+    mix-blend-mode: overlay;
+}
+
 .nav-cta:hover {
     transform: translateY(-1px);
-    background: #e74c3c;
-    box-shadow: 0 6px 16px rgba(192,57,43,0.35);
+    background: linear-gradient(
+        to bottom,
+        rgba(var(--brand-red-rgb),0.96),
+        rgba(var(--brand-red-rgb),0.82)
+    );
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.22),
+        0 12px 26px rgba(0,0,0,0.10),
+        0 12px 26px rgba(var(--brand-red-rgb),0.12);
 }
 
 .nav-cta span {
@@ -287,10 +387,9 @@ img {
     color: #ffffff;
     font-size: 15px;
     font-weight: 600;
-    border: none;
+    border: 1px solid rgba(0,0,0,0.04);
     cursor: pointer;
-    /* Tighter shadow */
-    box-shadow: 0 6px 18px rgba(192,57,43,0.25);
+    box-shadow: var(--red-glow);
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -299,15 +398,17 @@ img {
 
 .btn-primary:hover {
     transform: translateY(-1px);
-    box-shadow: 0 10px 24px rgba(192,57,43,0.35);
-    background: #e74c3c;
+    box-shadow: var(--red-glow-hover);
+    background: color-mix(in srgb, var(--brand-red) 92%, white 8%);
 }
 
 .btn-secondary {
     padding: 11px 20px;
     border-radius: 999px;
-    border: 1px solid rgba(0,0,0,0.12);
-    background: rgba(255,255,255,0.92);
+    border: 1px solid rgba(0,0,0,0.10);
+    background: rgba(255,255,255,0.72);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
     font-size: 14px;
     font-weight: 500;
     display: inline-flex;
@@ -318,8 +419,17 @@ img {
 }
 .btn-secondary:hover {
     transform: translateY(-1px);
-    box-shadow: var(--shadow-subtle);
-    background: #ffffff;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.06);
+    background: rgba(255,255,255,0.82);
+    border-color: rgba(var(--brand-red-rgb),0.18);
+}
+
+/* Make primary button icon-circle match the new “material” styling */
+.btn-primary .btn-icon-circle,
+.nav-cta .btn-icon-circle {
+    border-color: rgba(255,255,255,0.40);
+    background: rgba(255,255,255,0.14);
+    color: #ffffff;
 }
 .btn-icon-circle {
     width: 24px;
@@ -905,7 +1015,7 @@ img {
 }
 .areas-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: 20px;
 }
 .areas-map {
@@ -1037,20 +1147,20 @@ img {
 }
 .booking-button {
     border-radius: 999px;
-    border: none;
+    border: 1px solid rgba(0,0,0,0.04);
     padding: 11px 20px;
     font-size: 13px;
     font-weight: 600;
-    background: #ffffff;
-    color: #111111;
+    background: var(--brand-red);
+    color: #ffffff;
     cursor: pointer;
     transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.55);
+    box-shadow: var(--red-glow);
 }
 .booking-button:hover {
     transform: translateY(-1px);
-    box-shadow: 0 20px 48px rgba(0,0,0,0.78);
-    background: #f9f9f9;
+    box-shadow: var(--red-glow-hover);
+    background: color-mix(in srgb, var(--brand-red) 92%, white 8%);
 }
 .contact-layout {
     display: grid;
@@ -1146,6 +1256,37 @@ img {
 .footer-meta {
     color: var(--text-muted);
     font-size: 11px;
+}
+.footer-meta > div {
+    display: block;
+}
+
+.footer-powered {
+    margin-top: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-muted);
+    font-size: 11px;
+}
+.footer-powered-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,0,0,0.18);
+    padding-bottom: 1px;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+.footer-powered-link:hover {
+    color: rgba(0,0,0,0.82);
+    border-color: rgba(0,0,0,0.42);
+}
+.footer-powered-logo {
+    height: 20px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 14px rgba(0,0,0,0.12));
+    opacity: 0.95;
 }
 .footer-cols {
     display: grid;
@@ -1395,22 +1536,44 @@ text-align: center;
 .builder-frequency {
 display: flex;
 gap: 10px;
+flex-wrap: wrap;
 }
 
 .freq-btn {
 border-radius: 999px;
 padding: 8px 14px;
-border: 1px solid rgba(0,0,0,0.1);
-background: #ffffff;
+border: 1px solid rgba(0,0,0,0.10);
+background: rgba(255,255,255,0.74);
+-webkit-backdrop-filter: blur(14px) saturate(160%);
+backdrop-filter: blur(14px) saturate(160%);
 cursor: pointer;
 font-size: 13px;
 transition: var(--transition-fast);
+position: relative;
 }
 
 .freq-btn.active {
-background: var(--brand-red);
+/* match the “material” system instead of a flat red fill */
+background: linear-gradient(
+  to bottom,
+  rgba(var(--brand-red-rgb),0.90),
+  rgba(var(--brand-red-rgb),0.74)
+);
 color: #ffffff;
-border-color: var(--brand-red);
+border-color: rgba(255,255,255,0.48);
+box-shadow:
+  inset 0 1px 0 rgba(255,255,255,0.18),
+  0 10px 22px rgba(var(--brand-red-rgb),0.10);
+}
+
+.freq-btn.active::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.22), rgba(255,255,255,0));
+  mix-blend-mode: overlay;
 }
 
 .builder-checkbox {
@@ -1677,12 +1840,18 @@ margin-top: 14px;
 /* MOBILE */
 @media (max-width: 780px) {
 .areas-layout {
-flex-direction: column;
-gap: 24px;
+    grid-template-columns: 1fr;
+    gap: 24px;
 }
 .updated-areas-map {
 padding: 20px;
 }
+}
+
+.btn-icon-circle svg {
+    width: 16px;
+    height: 16px;
+    display: block;
 }
 
 /* Clean white card style for service area map */
@@ -2085,18 +2254,23 @@ border-top: 1px solid #f0f0f0;
 }
 
 .btn-back {
-background: transparent;
-border: none;
-color: var(--text-muted);
-font-size: 14px;
-cursor: pointer;
-padding: 10px 16px;
-border-radius: 999px;
+    padding: 11px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.10);
+    background: rgba(255,255,255,0.72);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+    color: var(--brand-dark);
+    font-size: 14px;
+    cursor: pointer;
+    transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
 }
 
 .btn-back:hover {
-background: #f5f5f5;
-color: var(--brand-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.06);
+    background: rgba(255,255,255,0.82);
+    border-color: rgba(192,57,43,0.18);
 }
 
 .error-msg {
