@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Pricing | The Bin Running Brothers</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Simple, transparent pricing for trash bin running in North Georgia.">
+    
+        <link rel="stylesheet" href="/css/styles.css">
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/web-app-manifest-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        <link rel="manifest" href="/site.webmanifest">
+    
+        <meta property="og:title" content="Pricing | The Bin Running Brothers">
+        <meta property="og:description" content="Simple, transparent pricing for curbside bin running, post-pickup return, HOA plans, and more.">
+        <meta property="og:image" content="https://thebinrunningbrothers.com/images/web-app-manifest-512x512.png">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://thebinrunningbrothers.com/pricing/">
+    </head>
+    
+<body>
+<div class="page-shell">
+
+    <header class="nav">
+        <div class="nav-inner">
+            <div class="nav-left">
+                <div class="nav-logo-wrap">
+                    <img src="/images/TBRB.png"alt="The Bin Running Brothers logo" class="nav-logo">
+                </div>
+                <div class="nav-title-block">
+                    <span class="nav-brand">The Bin Running Brothers</span>
+                    <span class="nav-tagline">North Georgia trash day, handled.</span>
+                </div>
+            </div>
+
+            <nav class="nav-links" aria-label="Primary">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/services/" class="nav-link">Services</a>
+                <a href="/pricing/" class="nav-link nav-link-active">Pricing</a>
+                <a href="/process/" class="nav-link">How it works</a>
+                <a href="/areas/" class="nav-link">Service areas</a>
+                <a href="/contact/" class="nav-link">Contact</a>
+            </nav>
+
+            <a class="nav-cta" href="https://bcbpro.com/book/tbrb">
+                <span>Get Started</span>
+            </a>
+
+            <button class="nav-menu-toggle" type="button" aria-label="Toggle navigation">
+                <div class="nav-menu-toggle-bars">
+                    <span></span><span></span><span></span>
+                </div>
+            </button>
+        </div>
+
+        <div class="nav-links-mobile">
+            <div class="nav-links-mobile-inner">
+                <a href="/">Home</a>
+                <a href="/services/">Services</a>
+                <a href="/pricing/">Pricing</a>
+                <a href="/process/">How it works</a>
+                <a href="/areas/">Service areas</a>
+                <a href="/contact/">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="section pricing-hero">
+            <div class="section-title-block">
+                <span class="section-eyebrow">Pricing</span>
+                <h1 class="section-title" style="font-size:32px;">Simple, transparent pricing.</h1>
+                <p class="section-subtitle">
+                    No contracts. No hidden fees. Just dependable trash day service with clear pricing.
+                </p>
+            </div>
+        </section>
+
+        <section class="section pricing-builder">
+            <div class="pricing-builder-grid">
+
+                <div class="pricing-card-new">
+                    <h3 class="builder-title">Build your monthly price</h3>
+
+                    <label class="builder-label">How many bins?</label>
+                    <div class="builder-counter">
+                        <button id="binMinus" type="button">−</button>
+                        <span id="binCount">1</span>
+                        <button id="binPlus" type="button">+</button>
+                    </div>
+
+                    <label class="builder-label" style="margin-top:16px;">Service Type</label>
+                    <div class="builder-frequency">
+                        <button class="freq-btn active" data-service="curb_return">Curb & Return</button>
+                        <button class="freq-btn" data-service="to_curb">To Curb</button>
+                        <button class="freq-btn" data-service="return">Return</button>
+                    </div>
+
+                    <label class="builder-label" style="margin-top:16px;">
+                        Add bin cleaning?
+                    </label>
+                    <div class="builder-checkbox">
+                        <input type="checkbox" id="addCleaning">
+                        <label for="addCleaning">Yes, include monthly cleaning</label>
+                    </div>
+
+                    <div class="builder-results">
+                        <h3 class="builder-results-title">Your estimated price</h3>
+                        <div id="builderTotal" class="builder-total">$40/mo</div>
+                        <div id="builderBreakdown" class="builder-breakdown">
+                            1 bin • Curb & Return
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="pricing-info-card">
+                    <h3>What’s included</h3>
+                    <ul>
+                        <li>Pre-dawn curb placement</li>
+                        <li>Perfect bin alignment</li>
+                        <li>Secure return after pickup</li>
+                        <li>Live SMS notifications</li>
+                        <li>Flexible vacation holds</li>
+                        <li>Fully insured, family-owned</li>
+                    </ul>
+
+                    <a href="https://bcbpro.com/book/tbrb" class="btn-primary" style="margin-top:18px;">
+                        <span>View Pricing</span>
+                        <span class="btn-icon-circle">→</span>
+                    </a>
+                </aside>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <div class="footer-brand-row">
+                    <div class="nav-logo-wrap">
+                        <img src="/images/TBRB.png"alt="The Bin Running Brothers logo small">
+                    </div>
+                    <span class="nav-brand">The Bin Running Brothers</span>
+                </div>
+                <div class="footer-nav">
+                    <a href="/" class="footer-link">Home</a>
+                    <a href="/services/" class="footer-link">Services</a>
+                    <a href="/pricing/" class="footer-link">Pricing</a>
+                    <a href="/process/" class="footer-link">How it works</a>
+                    <a href="/areas/" class="footer-link">Service areas</a>
+                    <a href="/contact/" class="footer-link">Contact</a>
+                </div>
+                <div class="footer-meta">
+                    Serving North Georgia.<br>
+                    © <span id="footer-year"></span> The Bin Running Brothers
+                </div>
+            </div>
+
+            <div class="footer-cols">
+                <div>
+                    <div class="footer-col-title">Plans</div>
+                    <span class="footer-link">Weekly service</span>
+                    <span class="footer-link">Twice weekly</span>
+                </div>
+                <div>
+                    <div class="footer-col-title">Company</div>
+                    <span class="footer-link">Family-owned</span>
+                    <span class="footer-link">Route safety</span>
+                </div>
+                <div>
+                    <div class="footer-col-title">Support</div>
+                    <span class="footer-link">FAQ</span>
+                    <a href="https://bcbpro.com/book/the-bin-running-brothers/terms" class="footer-link" target="_blank" rel="noopener">Privacy &amp; Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<a class="floating-booking" href="https://bcbpro.com/book/tbrb">
+    <div class="floating-booking-dot"></div>
+    <span>Trash day help is available in your area.</span>
+    <span class="floating-booking-status">Get Started</span>
+</a>
+
+<script src="/js/main.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Elements
+        const binMinus = document.getElementById('binMinus');
+        const binPlus = document.getElementById('binPlus');
+        const binCountEl = document.getElementById('binCount');
+        // Select buttons using the existing class "freq-btn"
+        const serviceBtns = document.querySelectorAll('.freq-btn'); 
+        const cleaningCheckbox = document.getElementById('addCleaning');
+        const builderTotal = document.getElementById('builderTotal');
+        const builderBreakdown = document.getElementById('builderBreakdown');
+        
+        // State
+        let count = 1;
+        let serviceType = 'curb_return'; // 'curb_return', 'to_curb', or 'return'
+        
+        // Pricing Logic
+        const PRICING = {
+            curb_return: { base: 40, additional: 5, label: "Curb & Return" },
+            to_curb:     { base: 20, additional: 5, label: "To Curb" },
+            return:      { base: 20, additional: 5, label: "Return Only" }
+        };
+
+        const cleaningPrice = 0; // Set this if cleaning adds cost (e.g. 10)
+
+        function updateCalculator() {
+            const plan = PRICING[serviceType];
+            
+            // Formula: Base price (includes 1st bin) + (Additional bins * 5)
+            const additionalBins = Math.max(0, count - 1);
+            let total = plan.base + (additionalBins * plan.additional);
+
+            // Add cleaning if checked
+            if (cleaningCheckbox.checked) {
+                total += cleaningPrice;
+            }
+            
+            // Update Text
+            binCountEl.textContent = count;
+            builderTotal.textContent = `$${total}/mo`;
+            
+            let breakdownText = `${count} bin${count > 1 ? 's' : ''} • ${plan.label}`;
+            if (additionalBins > 0) {
+                 breakdownText += ` (+$${additionalBins * plan.additional} extra bins)`;
+            }
+            if (cleaningCheckbox.checked && cleaningPrice > 0) {
+                breakdownText += ` + Cleaning`;
+            }
+            
+            builderBreakdown.textContent = breakdownText;
+        }
+
+        // Listeners
+        binMinus.addEventListener('click', () => {
+            if (count > 1) { count--; updateCalculator(); }
+        });
+
+        binPlus.addEventListener('click', () => {
+            if (count < 10) { count++; updateCalculator(); }
+        });
+
+        serviceBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                serviceBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                serviceType = btn.getAttribute('data-service');
+                updateCalculator();
+            });
+        });
+
+        cleaningCheckbox.addEventListener('change', updateCalculator);
+
+        // Init
+        updateCalculator();
+        
+        // Footer Year
+        const yearSpan = document.getElementById('footer-year');
+        if(yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+</script>
+
+</body>
+</html>

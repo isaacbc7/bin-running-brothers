@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get Started | The Bin Running Brothers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sign up for bin running service. Quick, simple pricing for North Georgia trash day help.">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/web-app-manifest-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+<div class="page-shell">
+    <header class="nav">
+        <div class="nav-inner">
+            <div class="nav-left">
+                <div class="nav-logo-wrap">
+                    <img src="/images/TBRB.png" alt="The Bin Running Brothers logo" class="nav-logo">
+                </div>
+                <div class="nav-title-block">
+                    <span class="nav-brand">The Bin Running Brothers</span>
+                    <span class="nav-tagline">North Georgia trash day, handled.</span>
+                </div>
+            </div>
+            <nav class="nav-links" aria-label="Primary">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/services/" class="nav-link">Services</a>
+                <a href="/pricing/" class="nav-link">Pricing</a>
+                <a href="/process/" class="nav-link">How it works</a>
+                <a href="/areas/" class="nav-link">Service areas</a>
+                <a href="/contact/" class="nav-link">Contact</a>
+            </nav>
+            <a class="nav-cta" href="/get-started/">
+                <span>Get Started</span>
+            </a>
+            <button class="nav-menu-toggle" type="button" aria-label="Toggle navigation">
+                <div class="nav-menu-toggle-bars">
+                    <span></span><span></span><span></span>
+                </div>
+            </button>
+        </div>
+        <div class="nav-links-mobile">
+            <div class="nav-links-mobile-inner">
+                <a href="/">Home</a>
+                <a href="/services/">Services</a>
+                <a href="/pricing/">Pricing</a>
+                <a href="/process/">How it works</a>
+                <a href="/areas/">Service areas</a>
+                <a href="/contact/">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main style="flex: 1; background: #f7f7f7; padding: 40px 0;">
+        <section class="section">
+            <div class="wizard-container">
+                
+                <div class="wizard-progress" aria-hidden="true">
+                    <div class="wizard-step-indicator active" id="indicator-1">
+                        <div class="step-circle">1</div>
+                        <span class="step-label">Contact</span>
+                    </div>
+                    <div class="wizard-step-indicator" id="indicator-2">
+                        <div class="step-circle">2</div>
+                        <span class="step-label">Address</span>
+                    </div>
+                    <div class="wizard-step-indicator" id="indicator-3">
+                        <div class="step-circle">3</div>
+                        <span class="step-label">Service</span>
+                    </div>
+                </div>
+
+                <form id="signup-form" novalidate>
+                    
+                    <div class="wizard-step active" id="step-1" role="tabpanel">
+                        <h1 class="wizard-title">Let’s get started</h1>
+                        <p class="wizard-subtitle">First, who are we helping?</p>
+
+                        <div class="grid-2" style="gap: 16px;">
+                            <div class="form-group">
+                                <label class="form-label" for="firstName">First Name</label>
+                                <input type="text" class="form-input" id="firstName" name="firstName" required autocomplete="given-name">
+                                <div class="error-msg">Please enter your first name.</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="lastName">Last Name</label>
+                                <input type="text" class="form-input" id="lastName" name="lastName" required autocomplete="family-name">
+                                <div class="error-msg">Please enter your last name.</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email Address</label>
+                            <input type="email" class="form-input" id="email" name="email" required autocomplete="email">
+                            <div class="error-msg">Please enter a valid email address.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Phone Number</label>
+                            <input type="tel" class="form-input" id="phone" name="phone" required autocomplete="tel" placeholder="(555) 555-5555">
+                            <div class="error-msg">Please enter a valid phone number.</div>
+                        </div>
+
+                        <div class="wizard-actions">
+                            <button type="button" class="btn-back" disabled style="opacity:0; pointer-events:none;">Back</button>
+                            <button type="button" class="btn-primary next-step">
+                                <span>Next: Address</span>
+                                <span class="btn-icon-circle">→</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="wizard-step" id="step-2" role="tabpanel">
+                        <h2 class="wizard-title">Where do you need service?</h2>
+                        <p class="wizard-subtitle">We currently serve Jasper, Ball Ground, and Canton.</p>
+
+                        <div class="form-group">
+                            <label class="form-label" for="street">Street Address</label>
+                            <input type="text" class="form-input" id="street" name="street" required autocomplete="street-address">
+                            <div class="error-msg">Please enter your street address.</div>
+                        </div>
+
+                        <div class="grid-2" style="gap: 16px;">
+                            <div class="form-group">
+                                <label class="form-label" for="city">City</label>
+                                <select class="form-select" id="city" name="city" required>
+                                    <option value="" disabled selected>Select City</option>
+                                    <option value="Jasper">Jasper</option>
+                                    <option value="Ball Ground">Ball Ground</option>
+                                    <option value="Canton">Canton</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div class="error-msg">Please select a city.</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="zip">Zip Code</label>
+                                <input type="text" class="form-input" id="zip" name="zip" required autocomplete="postal-code" inputmode="numeric">
+                                <div class="error-msg">Please enter a valid zip code.</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="gateCode">Gate Code / Access Instructions (Optional)</label>
+                            <textarea class="form-textarea" id="gateCode" name="gateCode" rows="2" placeholder="e.g. Gate code is #1234, or steep driveway."></textarea>
+                        </div>
+
+                        <div class="wizard-actions">
+                            <button type="button" class="btn-back prev-step">Back</button>
+                            <button type="button" class="btn-primary next-step">
+                                <span>Next: Service Details</span>
+                                <span class="btn-icon-circle">→</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="wizard-step" id="step-3" role="tabpanel">
+                        <h2 class="wizard-title">Customize your plan</h2>
+                        <p class="wizard-subtitle">Almost done. Tell us about your trash day.</p>
+
+                        <div class="form-group">
+                            <label class="form-label" for="frequency">How often do you need help?</label>
+                            <select class="form-select" id="frequency" name="frequency" required>
+                                <option value="weekly">Weekly Service (Best Value)</option>
+                                <option value="biweekly">Every Other Week</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="vacation">Vacation / One-time Only</option>
+                            </select>
+                        </div>
+
+                        <div class="grid-2" style="gap: 16px;">
+                            <div class="form-group">
+                                <label class="form-label" for="pickupDay">Trash Pickup Day</label>
+                                <select class="form-select" id="pickupDay" name="pickupDay" required>
+                                    <option value="" disabled selected>Select Day</option>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Tuesday">Tuesday</option>
+                                    <option value="Wednesday">Wednesday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Friday">Friday</option>
+                                </select>
+                                <div class="error-msg">Please select your pickup day.</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="binCount">Number of Bins</label>
+                                <select class="form-select" id="binCount" name="binCount">
+                                    <option value="1">1 Bin</option>
+                                    <option value="2" selected>2 Bins</option>
+                                    <option value="3">3 Bins</option>
+                                    <option value="4+">4+ Bins</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Add-ons</label>
+                            <label class="checkbox-group">
+                                <input type="checkbox" name="cleaning" value="yes">
+                                <span class="checkbox-label">Include bin cleaning info?</span>
+                            </label>
+                            <label class="checkbox-group" style="margin-top:8px;">
+                                <input type="checkbox" name="recyclingReminders" value="yes" checked>
+                                <span class="checkbox-label">Enable recycling day SMS reminders?</span>
+                            </label>
+                        </div>
+
+                        <div class="wizard-actions">
+                            <button type="button" class="btn-back prev-step">Back</button>
+                            <button type="submit" class="btn-primary">
+                                <span id="submit-text">Get Started</span>
+                                <span class="btn-icon-circle">✓</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="wizard-step" id="step-success" role="tabpanel" style="text-align: center;">
+                        <span class="success-icon">🎉</span>
+                        <h2 class="wizard-title">We’ve got it!</h2>
+                        <p class="wizard-subtitle">Thanks <span id="success-name"></span>. We have received your details.</p>
+                        
+                        <div style="background: #f0fdf4; border: 1px solid #dcfce7; color: #166534; padding: 16px; border-radius: 12px; margin-bottom: 24px;">
+                            <strong>What happens next?</strong><br>
+                            We will text you at <strong id="success-phone"></strong> within 24 hours to confirm your route availability and final price.
+                        </div>
+
+                        <a href="/" class="btn-secondary">Return Home</a>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <div class="footer-brand-row">
+                    <div class="nav-logo-wrap">
+                        <img src="/images/TBRB.png" alt="The Bin Running Brothers logo small">
+                    </div>
+                    <span class="nav-brand">The Bin Running Brothers</span>
+                </div>
+                <div class="footer-nav">
+                    <a href="/" class="footer-link">Home</a>
+                    <a href="/services/" class="footer-link">Services</a>
+                    <a href="/pricing/" class="footer-link">Pricing</a>
+                    <a href="/process/" class="footer-link">How it works</a>
+                    <a href="/areas/" class="footer-link">Service areas</a>
+                    <a href="/contact/" class="footer-link">Contact</a>
+                </div>
+                <div class="footer-meta">
+                    <span>Serving North Georgia from Ball Ground and surrounding communities.</span><br>
+                    <span>© <span id="footer-year"></span> The Bin Running Brothers. All rights reserved.</span>
+                    <br>
+                    <a href="https://bcbpro.com/book/the-bin-running-brothers/terms" class="footer-link" target="_blank" rel="noopener">Privacy &amp; Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<script src="/js/main.js"></script>
+</body>
+</html>
