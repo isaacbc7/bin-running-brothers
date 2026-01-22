@@ -655,6 +655,18 @@ img {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    transition: all var(--transition-fast);
+}
+a.service-card {
+    cursor: pointer;
+}
+a.service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    background: rgba(255,255,255,1);
+}
+a.service-card:active {
+    transform: translateY(0);
 }
 .service-icon-circle {
     width: 34px;
@@ -948,33 +960,67 @@ img {
     max-height: 200px;
 }
 .faq-aside {
-    border-radius: var(--radius-lg);
-    padding: 18px;
-    background: radial-gradient(circle at top left, #111111 0, #222222 40%, #111111 100%);
+    border-radius: var(--radius-xl);
+    padding: 28px 24px;
+    background: linear-gradient(135deg, rgba(var(--brand-red-rgb), 0.95) 0%, rgba(var(--brand-red-rgb), 0.85) 100%);
     color: #ffffff;
-    box-shadow: 0 22px 60px rgba(0,0,0,0.7);
+    box-shadow: 0 12px 40px rgba(var(--brand-red-rgb), 0.25), 0 4px 12px rgba(0,0,0,0.15);
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.15);
 }
+
+/* Subtle pattern overlay for texture */
+.faq-aside::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.08;
+    background-image: 
+        radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0);
+    background-size: 20px 20px;
+}
+
 .faq-aside-title {
-    font-size: 18px;
-    font-weight: 650;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.02em;
 }
 .faq-aside-body {
-    font-size: 13px;
-    color: rgba(255,255,255,0.78);
+    font-size: 14px;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
 }
 .faq-aside-row {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    font-size: 12px;
+    font-size: 13px;
+    margin-top: 4px;
+    position: relative;
+    z-index: 1;
 }
 .faq-aside-chip {
-    padding: 5px 9px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.08);
+    padding: 8px 14px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.22);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25);
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+.faq-aside-chip:hover {
+    background: rgba(255,255,255,0.30);
+    transform: translateY(-1px);
 }
 .testimonials-grid {
     display: grid;

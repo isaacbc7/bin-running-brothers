@@ -62,7 +62,7 @@
                         <button class="freq-btn active" type="button" data-frequency="weekly">Weekly</button>
                         <button class="freq-btn" type="button" data-frequency="biweekly">Every other week</button>
                         <button class="freq-btn" type="button" data-frequency="monthly">Monthly</button>
-                        <button class="freq-btn" type="button" data-frequency="onetime">One time / Vacation</button>
+                        <button class="freq-btn" type="button" data-frequency="onetime">One time</button>
                     </div>
 
                     <label class="builder-label" style="margin-top:16px;">
@@ -79,6 +79,9 @@
                         <div id="builderBreakdown" class="builder-breakdown">
                             1 bin • Curb & Return
                         </div>
+                        <p style="font-size:12px; color:rgba(255,255,255,0.7); margin-top:12px; line-height:1.4;">
+                            Prices may vary depending on your location.
+                        </p>
                     </div>
                 </div>
 
@@ -99,10 +102,10 @@
                         <div style="padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.10);">
                             <div style="font-weight: 650; margin-bottom: 6px;">What you get</div>
                             <ul style="margin:0; padding-left: 18px; font-size: 13px; color: rgba(255,255,255,0.86); line-height: 1.55;">
-                                <li>Consistent curb placement and clean alignment</li>
-                                <li>Secure return after pickup (no bins stuck at the curb)</li>
+                                <li>Bins placed at the curb nice and neat</li>
+                                <li>Bins brought back after pickup (no bins left sitting at the curb)</li>
                                 <li>Live SMS notifications</li>
-                                <li>One-time / vacation bin runs when you’re traveling</li>
+                                <li>One-time bin runs when you need occasional help</li>
                                 <li>Fully insured, family-owned</li>
                             </ul>
                         </div>
@@ -123,7 +126,7 @@
                     <span class="section-eyebrow">Plans</span>
                     <h2 class="section-title">Pick the coverage that fits your routine.</h2>
                     <p class="section-subtitle">
-                        These quick links match the footer plan items so you always land on the exact plan section.
+                        Click any plan below to see pricing with that frequency pre-selected.
                     </p>
                 </div>
                 <a class="btn-secondary" href="https://bcbpro.com/book/the-bin-running-brothers">
@@ -133,30 +136,30 @@
             </div>
 
             <div class="grid-2" style="gap:20px;">
-                <div class="service-card" id="weekly-routes">
+                <a href="/pricing/?frequency=weekly" class="service-card" id="weekly-routes" style="text-decoration:none; color:inherit; display:block;">
                     <h3 style="margin-top:0;">Weekly routes</h3>
                     <p style="color:var(--text-muted); margin:0;">
                         The most common plan — bins out and back every pickup day.
                     </p>
-                </div>
-                <div class="service-card" id="every-other-week">
+                </a>
+                <a href="/pricing/?frequency=biweekly" class="service-card" id="every-other-week" style="text-decoration:none; color:inherit; display:block;">
                     <h3 style="margin-top:0;">Every other week</h3>
                     <p style="color:var(--text-muted); margin:0;">
                         Flexible coverage for light usage or alternating pickup schedules.
                     </p>
-                </div>
-                <div class="service-card" id="monthly-coverage">
+                </a>
+                <a href="/pricing/?frequency=monthly" class="service-card" id="monthly-coverage" style="text-decoration:none; color:inherit; display:block;">
                     <h3 style="margin-top:0;">Monthly coverage</h3>
                     <p style="color:var(--text-muted); margin:0;">
                         Ideal for second homes or low-volume households.
                     </p>
-                </div>
-                <div class="service-card">
-                    <h3 style="margin-top:0;">Vacation add-ons</h3>
+                </a>
+                <a href="/pricing/?frequency=onetime" class="service-card" style="text-decoration:none; color:inherit; display:block;">
+                    <h3 style="margin-top:0;">One-time service</h3>
                     <p style="color:var(--text-muted); margin:0;">
-                        Traveling? See <a href="/plan-trip/">trip coverage</a> for exact details and scheduling.
+                        Need help for a single pickup? One-time service is available for occasional needs.
                     </p>
-                </div>
+                </a>
             </div>
         </section>
 

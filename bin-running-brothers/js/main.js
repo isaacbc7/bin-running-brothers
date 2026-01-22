@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", async function() {
             weekly: "Weekly",
             biweekly: "Every other week",
             monthly: "Monthly",
-            onetime: "One time / Vacation",
+            onetime: "One time",
         };
 
         const PRICE_TABLE = {
@@ -262,7 +262,26 @@ document.addEventListener("DOMContentLoaded", async function() {
         const activeCleaningBtn = cleaningBtns.find((b) => b.classList.contains("active"));
         if (activeCleaningBtn?.getAttribute("data-cleaning")) cleaning = activeCleaningBtn.getAttribute("data-cleaning");
 
-        calculate();
+        // Check URL parameters for pre-selected frequency (after initializing from markup)
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlFrequency = urlParams.get("frequency");
+        if (urlFrequency && ["weekly", "biweekly", "monthly", "onetime"].includes(urlFrequency)) {
+            // Find and click the matching frequency button to update UI and trigger calculation
+            const targetBtn = frequencyBtns.find((b) => b.getAttribute("data-frequency") === urlFrequency);
+            if (targetBtn) {
+                targetBtn.click();
+                // Smooth scroll to calculator after a brief delay to ensure it's rendered
+                setTimeout(() => {
+                    const calculatorEl = document.querySelector(".pricing-builder");
+                    if (calculatorEl) {
+                        calculatorEl.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                }, 100);
+            }
+        } else {
+            // No URL param, just calculate with defaults
+            calculate();
+        }
     }
 
     /* --- GET STARTED WIZARD LOGIC --- */
